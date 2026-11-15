@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { TvFrame } from "./board";
 
+/** NEXT_PUBLIC_LIVE_BOARDS=off keeps the screenshots, for hosts that cannot embed other sites. */
+const LIVE_BOARDS_OFF = process.env.NEXT_PUBLIC_LIVE_BOARDS === "off";
+
 type LiveBoardProps = {
   /** URL of the live board. */
   src: string;
@@ -27,7 +30,7 @@ export function LiveBoard({ src, poster, title, portrait, label = "Live now", st
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || LIVE_BOARDS_OFF) return;
     const nav = navigator as Navigator & { connection?: { saveData?: boolean } };
     const light = window.matchMedia("(max-width: 900px)").matches || Boolean(nav.connection?.saveData);
     const reveal = () => setMode(light ? "manual" : "live");

@@ -71,3 +71,5 @@ The café in the film ("Goldfinch Café") is a made-up example. The boards shown
 ## Deploy
 
 Works on Netlify or Vercel with the defaults (`npm run build`). A `netlify.toml` is included. Set `LEAD_WEBHOOK_URL` in the host's environment settings.
+
+Optional: `NEXT_PUBLIC_LIVE_BOARDS=off` at build time shows the board screenshots instead of the live embeds, for preview hosts that cannot frame other sites.
