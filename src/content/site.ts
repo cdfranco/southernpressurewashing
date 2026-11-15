@@ -12,7 +12,7 @@ export const brand = {
   url: "https://athena-boards.vercel.app",
   tagline: "Digital boards · designed, installed, kept current",
   metaDescription:
-    "Athena Boards designs a branded digital board for your business, installs the screen, and keeps it current under a monthly care plan. Installed packages from $950, or $500 on a TV you already own. One screen for a café or one system for hundreds of locations.",
+    "Athena Boards designs a branded digital board for your business, installs the screen, and keeps it current under a monthly care plan. Installed packages from $950, $150 less if you install it yourself, or $500 on a TV you already own. One screen for a café or one system for hundreds of locations.",
   ogDescription:
     "Your menu, your specials, your brand — on a screen that runs itself. Installed packages from $950. Care plans from $49/month. You see your board before you pay.",
   footerBlurb:
@@ -46,6 +46,7 @@ export const navigation: NavItem[] = [
     href: "/pricing",
     children: [
       { label: "Packages", href: "/pricing#packages", description: "Design, display, mount and installation. One-time." },
+      { label: "Install it yourself", href: "/pricing#install", description: "The same equipment for $150 less. Your wall, your call." },
       { label: "Care plans", href: "/pricing#plans", description: "Keeps it running and current, from $49 a month." },
       { label: "Chain pricing", href: "/pricing#chains", description: "One price per location, with a rollout calculator." },
       { label: "Change fees", href: "/pricing#changes", description: "If it isn't in your plan, it's on this list." },
@@ -374,6 +375,30 @@ export const chainPricing = {
   brandBuildWaivedAt: 200,
 };
 
+/* ── Packages and the "you install it" option ─────────────────────────── */
+
+export const usd = (dollars: number) => `$${dollars.toLocaleString("en-US")}`;
+
+/** Installed, one-time package prices in dollars. */
+export const packagePrice = {
+  boardKit: 500,
+  local43: 950,
+  local55: 1500,
+  local65: 2500,
+  commercial43: 1500,
+  commercial55: 2200,
+  commercial65: 3000,
+} as const;
+
+/** "You install it": we supply the same equipment, set up for the board, and the customer mounts it. */
+export const selfInstall = {
+  headline: "Your business, your choice.",
+  /** Dollars off the installed price of any Local or Commercial package. */
+  discount: 150,
+  /** Pickup or delivery is free within this many miles of Athens; shipping beyond that is quoted. */
+  freeDeliveryMiles: 60,
+};
+
 /* ── The film: chapter start times match the timeline in video/film.js ── */
 
 export const film = {
@@ -408,7 +433,7 @@ export const film = {
       label: "We install it",
       when: "Days 7–14 · one visit",
       start: 19.5,
-      body: "We deliver the display, mount it where we agreed, connect it to your Wi-Fi and bring the board live in one visit. Portrait or landscape. We leave the remote with the manager, behind the counter.",
+      body: "We deliver the display, mount it where we agreed, connect it to your Wi-Fi and bring the board live in one visit. Portrait or landscape. We leave the remote with the manager, behind the counter. Prefer to hang it yourself? Take the same equipment, set up for your board, for $150 less.",
     },
     {
       id: "fresh",

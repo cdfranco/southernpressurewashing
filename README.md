@@ -32,7 +32,7 @@ Node 20+ (see `.nvmrc`).
 
 ## Where things live
 
-- `src/content/site.ts` — shared content: brand details, navigation, footer, the board portfolio, chain pricing bands, film chapters, hero slides. Every page reads prices and board data from here.
+- `src/content/site.ts` — shared content: brand details, navigation, footer, the board portfolio, chain pricing bands, film chapters, hero slides. Every page reads prices and board data from here. The self-install discount (`selfInstall.discount`) and the installed package prices (`packagePrice`) live here too; the self-install price is always the installed price minus the discount.
 - `src/app/<page>/page.tsx` — each page's own copy sits next to its layout.
 - `src/app/globals.css` — design tokens (`@theme`): Athena navy and teal, surfaces, shadows, fonts, gradient backgrounds, the few keyframe animations.
 - `src/components/` — header with dropdown navigation, footer, buttons, sections, cards, tables, tabs, FAQ, the TV frame, lazy live-board embed, store picker, pricing calculator, lead form, hero carousel, film player.

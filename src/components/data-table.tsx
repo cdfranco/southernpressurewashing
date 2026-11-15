@@ -17,8 +17,10 @@ export function DataTable({
   caption?: string;
   firstColumnWidth?: string;
   minWidth?: string;
-  emphasizeLast?: boolean;
+  /** Right-align and embolden the last column, or the last N columns. */
+  emphasizeLast?: boolean | number;
 }) {
+  const emphasized = emphasizeLast === true ? 1 : emphasizeLast || 0;
   return (
     <div className="overflow-x-auto rounded-2xl border border-line bg-white">
       <table className={`w-full border-collapse text-left ${minWidth}`}>
@@ -30,7 +32,7 @@ export function DataTable({
                 key={i}
                 scope="col"
                 className={`px-5 py-4 text-[12.5px] font-bold uppercase tracking-[0.1em] text-ink-900/70 ${i === 0 ? firstColumnWidth : ""} ${
-                  emphasizeLast && i === head.length - 1 ? "text-right" : ""
+                  i >= head.length - emphasized ? "text-right" : ""
                 }`}
               >
                 {cell}
@@ -47,7 +49,7 @@ export function DataTable({
                     key={i}
                     className={`px-5 py-4 text-[15px] leading-relaxed ${
                       i === 0 ? "font-display font-bold text-ink-900" : "text-body"
-                    } ${emphasizeLast && i === row.length - 1 ? "whitespace-nowrap text-right font-display text-base font-bold tabular-nums text-ink-900" : ""}`}
+                    } ${i >= row.length - emphasized ? "whitespace-nowrap text-right font-display text-base font-bold tabular-nums text-ink-900" : ""}`}
                   >
                     {cell}
                   </td>

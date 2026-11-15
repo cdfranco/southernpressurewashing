@@ -10,6 +10,7 @@ import { FleetDemo } from "@/components/fleet-demo";
 import { HeroCarousel } from "@/components/hero-carousel";
 import { Icon } from "@/components/icons";
 import { LiveShowcase } from "@/components/live-showcase";
+import { PackageCards } from "@/components/package-cards";
 import { Accent, Kicker, Section, SectionHeader } from "@/components/section";
 import { Tabs } from "@/components/tabs";
 import { boardBySlug, brand, builtFor, film } from "@/content/site";
@@ -87,55 +88,6 @@ function LinePanel({ line }: { line: (typeof lines)[number] }) {
   );
 }
 
-/* ── Packages ──────────────────────────────────────────────────────── */
-
-const packages = [
-  {
-    name: "Board Kit",
-    tagline: "You already have a TV on the wall",
-    price: "$500",
-    includes: "Design + our player software + setup",
-    features: [
-      "Custom board design in your brand",
-      "Locked player software on your TV",
-      "Remote setup and a self-install sheet",
-      "One round of corrections",
-    ],
-    link: "Board Kit details",
-    featured: false,
-  },
-  {
-    name: "Local 43",
-    tagline: "Counters, entries, waiting areas",
-    price: "$950",
-    includes: "43\" 4K smart TV, mount, pro install",
-    features: [
-      "Everything in the Board Kit",
-      "43\" 4K display and lockable anti-theft mount",
-      "Professional installation, one visit",
-      "Cables hidden, remote with the manager",
-      "55\" $1,500 · 65\" $2,500",
-    ],
-    link: "See all sizes",
-    featured: true,
-  },
-  {
-    name: "Commercial 43",
-    tagline: "All-day screens, portrait walls, chains",
-    price: "$1,500",
-    includes: "Commercial 16/7 panel, 3-year limited warranty, installed",
-    features: [
-      "Everything in Local 43",
-      "Commercial signage panel built to run 16 hours a day, every day",
-      "Runs the board from the panel's own signage OS; a small media box is added where a panel has no URL launcher",
-      "Native portrait; 3-year limited manufacturer warranty",
-      "55\" $2,200 · 65\" $3,000",
-    ],
-    link: "Commercial 43 details",
-    featured: false,
-  },
-];
-
 /* ── Trust ─────────────────────────────────────────────────────────── */
 
 const trust = [
@@ -199,6 +151,17 @@ const faqs: FaqItem[] = [
       "Yes. Boards are clock-driven: a breakfast menu until 11, lunch after, happy hour at 4, a \"closed — see you tomorrow\" state after hours. Weekly specials highlight the current day. Seasonal menus switch on the dates you choose.",
   },
   {
+    question: "Can I install the screen myself?",
+    answer: (
+      <>
+        Yes, and it costs $150 less. You get the same display and mount as the installed package, set up for your board, with
+        a one-page install sheet, and we bring it live with you remotely. Hang it where and how you want. Pickup or delivery is
+        free within 60 miles of Athens; shipping elsewhere is quoted with your order.{" "}
+        <Link href="/pricing#install">How installing it yourself works</Link>.
+      </>
+    ),
+  },
+  {
     question: "Who owns the display and the player?",
     answer:
       "You do. Title to the hardware transfers to you when the package is paid, and the manufacturer's warranty is passed through to you. Our software stays ours and is licensed to you while you're on a care plan. The one exception is the partner-panel offset, where we keep title because we're paying for the screen.",
@@ -240,7 +203,8 @@ export default function Home() {
             </div>
 
             <p className="mt-8 max-w-xl text-[15px] leading-relaxed text-ink-900/75">
-              Installed packages from <strong>$950</strong>, or <strong>$500</strong> on a TV you already own. Care plans from{" "}
+              Installed packages from <strong>$950</strong>, <strong>$150</strong> less if you install it yourself, or{" "}
+              <strong>$500</strong> on a TV you already own. Care plans from{" "}
               <strong>$49</strong> a month. You see your board before you pay anything.
             </p>
             <a
@@ -308,10 +272,10 @@ export default function Home() {
             We build the first version from your website and menu and send you a link. You see the finished board on your phone
             before a dollar changes hands. Then one round of corrections, and it&apos;s yours.
           </InfoCard>
-          <InfoCard icon="wrench" title="Screen, mount and install included">
-            Local and Commercial packages include the display, a lockable mount, hidden cabling and a professional install in one
-            visit; the board runs on the screen itself, so there is no extra box to fail. Already have a TV? The $500 Board Kit
-            puts the board on it.
+          <InfoCard icon="wrench" title="Screen and mount included, installed your way">
+            Local and Commercial packages include the display and a lockable mount; the board runs on the screen itself, so
+            there is no extra box to fail. We install it in one visit with the cables hidden, or you hang it yourself and take
+            $150 off. Already have a TV? The $500 Board Kit puts the board on it.
           </InfoCard>
           <InfoCard icon="refresh" title="Kept current, so you never touch it">
             Text us a new special or a price change and we put it on the screen within your plan&apos;s turnaround — two business
@@ -417,43 +381,9 @@ export default function Home() {
         <SectionHeader
           kicker="Pricing"
           title="One package fee. One monthly plan. No surprises."
-          description="The package pays for the design, the hardware and the install. The care plan keeps it running and current. Both are flat, both are published, and you see your board before you commit to either."
+          description="The package pays for the design, the hardware and the install, or less if you hang the screen yourself. The care plan keeps it running and current. Both are flat, both are published, and you see your board before you commit to either."
         />
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {packages.map((pkg) => (
-            <article
-              key={pkg.name}
-              className={`relative flex flex-col rounded-2xl border p-7 sm:p-8 ${
-                pkg.featured ? "border-ink-900 bg-ink-900 text-slate-300 shadow-float" : "border-line bg-white"
-              }`}
-            >
-              {pkg.featured && (
-                <span className="absolute -top-3 left-7 rounded-full bg-sun-400 px-3 py-1 text-[11.5px] font-bold uppercase tracking-[0.1em] text-ink-900">
-                  Our pick for a first screen
-                </span>
-              )}
-              <h3 className={`font-display text-2xl font-bold ${pkg.featured ? "text-white" : "text-ink-900"}`}>{pkg.name}</h3>
-              <p className={`mt-1 text-[15px] ${pkg.featured ? "text-slate-300" : "text-body"}`}>{pkg.tagline}</p>
-              <p className="mt-6 flex items-baseline gap-2">
-                <span className={`font-display text-5xl font-extrabold tracking-tight ${pkg.featured ? "text-white" : "text-ink-900"}`}>
-                  {pkg.price}
-                </span>
-                <span className={`text-sm ${pkg.featured ? "text-slate-400" : "text-slate-500"}`}>one-time</span>
-              </p>
-              <p className={`mt-2 text-[15px] font-semibold ${pkg.featured ? "text-brand-300" : "text-brand-700"}`}>{pkg.includes}</p>
-              <CheckList
-                items={pkg.features}
-                tone={pkg.featured ? "dark" : "light"}
-                className={`mt-6 flex-1 border-t pt-6 [&_li]:text-[15px] ${pkg.featured ? "border-white/10" : "border-line"}`}
-              />
-              <div className="mt-7">
-                <Button as="link" href="/pricing" variant={pkg.featured ? "light" : "secondary"} className="w-full">
-                  {pkg.link}
-                </Button>
-              </div>
-            </article>
-          ))}
-        </div>
+        <PackageCards />
         <p className="mx-auto mt-10 max-w-4xl text-center text-base leading-relaxed">
           Care plans <strong>$49, $99 or $199</strong> a month cover hosting, monitoring, software updates and content changes.{" "}
           <Link href="/pricing#plans" className="font-semibold text-brand-700 underline-offset-4 hover:underline">

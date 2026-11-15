@@ -100,7 +100,7 @@ const equipmentRows: ReactNode[][] = [
   ],
   [
     "Install",
-    "Our own technician, one visit, within 60 miles of Athens; travel added beyond",
+    "Our own technician, one visit, within 60 miles of Athens; travel added beyond. Or install it yourself for $150 less: the same equipment, set up for your board, with pickup or delivery free within 60 miles and shipping quoted elsewhere",
     "Field technicians dispatched nationwide through a marketplace, from a pre-configured kit and a one-page install sheet; photo confirmation on completion",
   ],
 ];

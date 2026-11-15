@@ -9,12 +9,13 @@ import { Icon } from "@/components/icons";
 import { PageHeader } from "@/components/page-header";
 import { PricingCalculator } from "@/components/pricing-calculator";
 import { Section, SectionHeader } from "@/components/section";
-import { chainPricing } from "@/content/site";
+import { CheckList } from "@/components/check-list";
+import { chainPricing, packagePrice, selfInstall, usd } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Published pricing. Packages from $500 one-time (design, hardware, install). Care plans $49, $99 and $199 a month. Per-location pricing for chains from $1,195 + $59/month.",
+    "Published pricing. Packages from $500 one-time (design, hardware, install), and $150 less if you install the screen yourself. Care plans $49, $99 and $199 a month. Per-location pricing for chains from $1,195 + $59/month.",
 };
 
 const inlineLink = "font-semibold text-brand-700 underline underline-offset-4 hover:text-brand-800";
@@ -26,78 +27,82 @@ type PackageRow = {
   /** Regular-weight text that follows the bold name. */
   detail?: string;
   badge?: string;
-  /** Price repeated under the name below 57rem, where the 52rem-wide table scrolls sideways. */
+  /** Prices repeated under the name below 63rem, where the 58rem-wide table scrolls sideways. */
   inlinePrice: string;
   bestFor: string;
   onTheWall: string;
+  /** Installed price. */
   price: string;
+  /** Price when the customer installs the screen; absent where that is not offered. */
+  selfPrice?: string;
   /** Quoted per site: a starting price, shown lighter than the fixed prices. */
   quoted?: boolean;
+};
+
+/** Both prices for a Local or Commercial package: installed, and installed minus the self-install discount. */
+const bothPrices = (installed: number) => {
+  const self = usd(installed - selfInstall.discount);
+  return { price: usd(installed), selfPrice: self, inlinePrice: `${usd(installed)} installed · ${self} if you install it` };
 };
 
 const packages: (PackageRow | { section: string })[] = [
   {
     name: "Board Kit",
     detail: " — your own TV",
-    inlinePrice: "$500 one-time",
+    inlinePrice: "$500 one-time, you install",
     bestFor: "You already have a TV up, or you'd rather buy it yourself",
     onTheWall:
       "Our locked player and software on your TV, custom board design, remote onboarding and a self-install sheet. On-site visit +$95.",
-    price: "$500",
+    price: "—",
+    selfPrice: usd(packagePrice.boardKit),
   },
-  { section: "Local — consumer 4K smart TV, installed" },
+  { section: "Local — consumer 4K smart TV" },
   {
     name: "Local 43",
     badge: "Our pick for a first screen",
-    inlinePrice: "$950 one-time",
     bestFor: "Counters, entries, waiting areas",
     onTheWall:
-      '43" 4K smart TV running our software (no separate player), lockable anti-theft mount, cables hidden, installed',
-    price: "$950",
+      '43" 4K smart TV running our software (no separate player), lockable anti-theft mount; cables hidden when we install it',
+    ...bothPrices(packagePrice.local43),
   },
   {
     name: "Local 55",
-    inlinePrice: "$1,500 one-time",
     bestFor: "Dining rooms, lobbies, gyms",
-    onTheWall: '55" 4K smart TV, lockable mount, installed',
-    price: "$1,500",
+    onTheWall: '55" 4K smart TV, lockable mount',
+    ...bothPrices(packagePrice.local55),
   },
   {
     name: "Local 65",
-    inlinePrice: "$2,500 one-time",
     bestFor: "Large rooms, feature walls",
-    onTheWall: '65" 4K smart TV, heavy-duty security mount, two-person install',
-    price: "$2,500",
+    onTheWall: '65" 4K smart TV, heavy-duty security mount; a two-person job whoever hangs it',
+    ...bothPrices(packagePrice.local65),
   },
   {
     section:
-      "Commercial — signage panel built to run 16 hours a day, every day (16/7-rated), 3-year limited manufacturer warranty, installed",
+      "Commercial — signage panel built to run 16 hours a day, every day (16/7-rated), 3-year limited manufacturer warranty",
   },
   {
     name: "Commercial 43",
-    inlinePrice: "$1,500 one-time",
     bestFor: "Screens that run open to close, every day; portrait walls; every chain",
     onTheWall:
-      '43" commercial panel (LG or Samsung signage class) that runs the board from the panel\'s own signage OS (LG "Play via URL" / Samsung "URL Launcher"); where a panel has no URL launcher we add a small media box (+$120). Native portrait, lockable mount, installed',
-    price: "$1,500",
+      '43" commercial panel (LG or Samsung signage class) that runs the board from the panel\'s own signage OS (LG "Play via URL" / Samsung "URL Launcher"); where a panel has no URL launcher we add a small media box (+$120). Native portrait, lockable mount',
+    ...bothPrices(packagePrice.commercial43),
   },
   {
     name: "Commercial 55",
-    inlinePrice: "$2,200 one-time",
     bestFor: "Dining rooms and lobbies that run all day",
-    onTheWall: '55" commercial panel, security mount, installed',
-    price: "$2,200",
+    onTheWall: '55" commercial panel, security mount',
+    ...bothPrices(packagePrice.commercial55),
   },
   {
     name: "Commercial 65",
-    inlinePrice: "$3,000 one-time",
     bestFor: "Large rooms, all-day retail",
-    onTheWall: '65" commercial panel, security mount, two-person install',
-    price: "$3,000",
+    onTheWall: '65" commercial panel, security mount; a two-person job whoever hangs it',
+    ...bothPrices(packagePrice.commercial65),
   },
   {
     name: 'Menu walls, 75"+, drive-through, outdoor',
-    inlinePrice: "quoted, from $3,500",
+    inlinePrice: "quoted, from $3,500 installed",
     bestFor: "Two to six screens behind a counter; anything outside",
     onTheWall: "Quoted per site. Same design system on every screen; content laid out as one menu.",
     price: "from $3,500",
@@ -118,7 +123,7 @@ function PackageName({ row }: { row: PackageRow }) {
           </span>
         </>
       )}
-      <span className="mt-1 block font-sans text-[15px] font-bold tabular-nums text-brand-700 min-[57rem]:hidden">{row.inlinePrice}</span>
+      <span className="mt-1 block font-sans text-[15px] font-bold tabular-nums text-brand-700 min-[63rem]:hidden">{row.inlinePrice}</span>
     </>
   );
 }
@@ -127,7 +132,7 @@ const packageRows = packages.map((row) =>
   "section" in row
     ? {
         // Below 57rem the table is wider than its frame: keep the sub-heading wrapping inside the visible part.
-        section: <span className="block max-w-[calc(100vw-6.75rem)] min-[57rem]:max-w-none">{row.section}</span>,
+        section: <span className="block max-w-[calc(100vw-6.75rem)] min-[63rem]:max-w-none">{row.section}</span>,
       }
     : [
         <PackageName key="name" row={row} />,
@@ -140,8 +145,44 @@ const packageRows = packages.map((row) =>
         ) : (
           row.price
         ),
+        row.selfPrice ? (
+          <span key="self" className="text-brand-700">
+            {row.selfPrice}
+          </span>
+        ) : (
+          <span key="self" className="font-normal text-slate-400">
+            —
+          </span>
+        ),
       ],
 );
+
+const installChoices = [
+  {
+    title: "We install it",
+    tagline: "The done-for-you way",
+    price: "The installed price",
+    featured: false,
+    points: [
+      "One visit: we deliver the screen, mount it level and connect it to your Wi-Fi",
+      "Cables hidden, and the board is live before we leave",
+      `Within ${selfInstall.freeDeliveryMiles} miles of Athens; elsewhere we add travel or use a local field technician at cost`,
+    ],
+  },
+  {
+    title: "You install it",
+    tagline: "The same equipment, your wall, your way",
+    price: `${usd(selfInstall.discount)} off any Local or Commercial package`,
+    featured: true,
+    points: [
+      "The same display and mount, set up for your board before you get it",
+      "Hang it where and how you want, on your own schedule, with your own hands or your own installer",
+      `Pickup or delivery is free within ${selfInstall.freeDeliveryMiles} miles of Athens; shipping elsewhere is quoted with your order`,
+      "A one-page install sheet, and we bring the board live with you remotely",
+      `Changed your mind? We'll install it for the ${usd(selfInstall.discount)} difference`,
+    ],
+  },
+];
 
 const packageNotes = [
   {
@@ -393,6 +434,18 @@ const faqs: FaqItem[] = [
     ),
   },
   {
+    question: "Can I install the screen myself?",
+    answer: (
+      <p>
+        Yes, and it costs {usd(selfInstall.discount)} less on any Local or Commercial package. You get the same display and
+        mount, set up for your board before you get it, with a one-page install sheet, and we bring it live with you remotely.
+        Pickup or delivery is free within {selfInstall.freeDeliveryMiles} miles of Athens; shipping elsewhere is quoted with your
+        order. Hang it where and how you want: the mounting is yours, and the board, the software and the support are still
+        ours. If you&apos;d rather we mount it after all, we&apos;ll do it for the {usd(selfInstall.discount)} difference.
+      </p>
+    ),
+  },
+  {
     question: "What happens if I cancel the care plan?",
     answer: (
       <p>
@@ -462,8 +515,9 @@ export default function PricingPage() {
         title="Two numbers. Both published."
         description={
           <>
-            A one-time <b>package</b> pays for the design, the hardware and the install. A monthly <b>care plan</b> keeps the
-            board running and current. Pick a screen, pick a plan, and you know the whole cost before we&apos;ve met.
+            A one-time <b>package</b> pays for the design, the hardware and the install, or {usd(selfInstall.discount)} less if you
+            install the screen yourself. A monthly <b>care plan</b> keeps the board running and current. Pick a screen, pick a
+            plan, and you know the whole cost before we&apos;ve met.
           </>
         }
       />
@@ -473,18 +527,53 @@ export default function PricingPage() {
           align="left"
           kicker="Step 1 · The package (one-time, per screen)"
           title="Design, display, mount and installation."
-          description="Every package includes the custom board design in your brand, one round of corrections, our locked player software, configuration and go-live. Installed prices are for one visit within 60 miles of Athens; elsewhere we add travel or use a local field technician at cost. You own the hardware: title passes to you on payment and the manufacturer's warranty is passed through to you."
+          description="Every package includes the custom board design in your brand, one round of corrections, our locked player software, configuration and go-live. We install it, or you take the same equipment and install it yourself for less. You own the hardware: title passes to you on payment and the manufacturer's warranty is passed through to you."
         />
+        {/* Who installs it */}
+        <div id="install" className="mt-10 scroll-mt-28 lg:mt-12">
+          <h3 className="font-display text-2xl font-bold text-ink-900">{selfInstall.headline}</h3>
+          <p className="mt-2 max-w-3xl text-[1.05rem] leading-relaxed">
+            Every Local and Commercial package comes two ways. The design, the equipment and the care plan are identical; the only
+            difference is who puts the screen on the wall.
+          </p>
+          <div className="mt-6 grid gap-5 lg:grid-cols-2">
+            {installChoices.map((choice) => (
+              <article
+                key={choice.title}
+                className={`rounded-2xl border p-6 sm:p-7 ${choice.featured ? "border-brand-500 bg-brand-50/50" : "border-line bg-white"}`}
+              >
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h4 className="font-display text-xl font-bold text-ink-900">{choice.title}</h4>
+                  <p className={`text-[15px] font-bold ${choice.featured ? "text-brand-800" : "text-ink-900/70"}`}>{choice.price}</p>
+                </div>
+                <p className="mt-1 text-[15px] text-body">{choice.tagline}</p>
+                <CheckList items={choice.points} className="mt-5 [&_li]:text-[15px]" />
+              </article>
+            ))}
+          </div>
+          <p className="mt-4 text-sm leading-relaxed text-slate-500">
+            When you install it, the mounting is yours; the board, the software and the support are still ours.
+          </p>
+        </div>
+
         <div className="mt-10 lg:mt-12">
-          <p className="mb-4 text-sm leading-relaxed text-slate-500 min-[57rem]:hidden">
-            On a phone, swipe the table sideways for the price column, or read the price under each package name.
+          <p className="mb-4 text-sm leading-relaxed text-slate-500 min-[63rem]:hidden">
+            On a phone, swipe the table sideways for the price columns, or read both prices under each package name.
           </p>
           <DataTable
             caption="Package prices"
-            head={["Package", "Best for", "What's on the wall", "One-time"]}
+            head={[
+              "Package",
+              "Best for",
+              "What's on the wall",
+              "Installed",
+              <span key="self" className="whitespace-nowrap">
+                You install
+              </span>,
+            ]}
             rows={packageRows}
-            minWidth="min-w-[52rem]"
-            emphasizeLast
+            minWidth="min-w-[58rem]"
+            emphasizeLast={2}
           />
         </div>
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
