@@ -22,7 +22,7 @@ function FooterLink({ href, children }: { href: string; children: React.ReactNod
 export function Footer() {
   return (
     <footer className="border-t border-line bg-white">
-      <div className="mx-auto max-w-[76rem] px-5 py-14 sm:px-8 lg:py-16">
+      <div className="mx-auto max-w-[80rem] px-5 py-14 sm:px-8 lg:py-16">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
           <div>
             <Logo />

@@ -374,47 +374,125 @@ export const chainPricing = {
   brandBuildWaivedAt: 200,
 };
 
-/* ── The film: chapter timings match public/video/athena-boards-film.* ── */
+/* ── The film: chapter start times match the timeline in video/film.js ── */
 
 export const film = {
-  title: "Athena Boards in under a minute",
+  title: "Athena Boards in 41 seconds",
   poster: "/video/athena-boards-film.jpg",
   mp4: "/video/athena-boards-film.mp4",
   webm: "/video/athena-boards-film.webm",
+  /** Total length in seconds. */
+  duration: 41,
   caption:
-    "From your menu to a screen on the wall. Boards shown in the film were designed for real Athens-area businesses; a demo is not an endorsement.",
+    "The café in the film is a made-up example. The boards on the other walls were designed for real Athens-area businesses; a demo is not an endorsement.",
   chapters: [
     {
       id: "build",
       step: "1",
       label: "We build your board",
       when: "Days 1–3 · no charge",
+      start: 0,
       body: "Send us your website or menu. We design the board in your brand and send you a private link to review — on your phone, your laptop, or a TV in your dining room.",
-      clip: "/video/chapter-1-build",
     },
     {
       id: "approve",
       step: "2",
       label: "You approve it",
       when: "Days 3–5",
+      start: 10,
       body: "Tell us what to fix — a price, a photo, a dish that's gone. One round of corrections is included. You accept a short, plain-English agreement on your phone and pay the one-time package fee.",
-      clip: "/video/chapter-2-approve",
     },
     {
       id: "install",
       step: "3",
       label: "We install it",
       when: "Days 7–14 · one visit",
+      start: 19.5,
       body: "We deliver the display, mount it where we agreed, connect it to your Wi-Fi and bring the board live in one visit. Portrait or landscape. We leave the remote with the manager, behind the counter.",
-      clip: "/video/chapter-3-install",
     },
     {
       id: "fresh",
       step: "4",
       label: "We keep it fresh",
       when: "Every day after",
+      start: 29.5,
       body: "Your care plan covers hosting, monitoring and content changes. Text us the change; it's live within your plan's turnaround. Seasonal menus switch themselves on the date you choose.",
-      clip: "/video/chapter-4-fresh",
     },
   ],
 };
+
+/* ── Home page: hero slides (illustrated venues with real boards on screen) ── */
+
+export const heroSlides = [
+  {
+    image: "/img/scenes/cafe.webp",
+    alt: "Illustration of a café wall with a mounted screen showing the Mama's Boy breakfast board",
+    board: "mamas-boy",
+    value: 21,
+    prefix: "",
+    suffix: "",
+    label: "boards designed for 18 businesses in Athens, GA",
+  },
+  {
+    image: "/img/scenes/taqueria.webp",
+    alt: "Illustration of a taquería wall with a mounted screen showing the LALO's weekly specials board",
+    board: "lalos",
+    value: 30,
+    prefix: "",
+    suffix: " min",
+    label: "from a change to a screen on our player app",
+  },
+  {
+    image: "/img/scenes/roastery.webp",
+    alt: "Illustration of a coffee bar with an upright screen showing the 1000 Faces menu board",
+    board: "thousand-faces",
+    value: 0,
+    prefix: "$",
+    suffix: "",
+    label: "due until you've seen your board",
+  },
+  {
+    image: "/img/scenes/lobby.webp",
+    alt: "Illustration of a rec-center lobby with a mounted screen showing the YWCO class schedule board",
+    board: "ywco",
+    value: 12,
+    prefix: "",
+    suffix: "",
+    label: "boards you can open live, right now",
+  },
+];
+
+export const builtFor = [
+  { label: "Restaurants", icon: "utensils" },
+  { label: "Coffee shops", icon: "cup" },
+  { label: "Bakeries", icon: "storefront" },
+  { label: "Laundromats", icon: "refresh" },
+  { label: "Rec centers", icon: "heart" },
+  { label: "Welcome centers", icon: "map-pin" },
+  { label: "Franchise & corporate chains", icon: "office" },
+];
+
+/* ── Home page: live boards shown in the showcase ── */
+
+export const liveShowcase = [
+  {
+    board: "mamas-boy",
+    kicker: "Diner menu · every price from the printed menu",
+    body: "A real board, running right now: live clock, local weather, today's menu with the restaurant's published prices.",
+  },
+  {
+    board: "lalos",
+    kicker: "Weekly specials · today auto-highlighted",
+    body: "Weekly specials with today highlighted. It changes at midnight without anyone touching it.",
+  },
+  {
+    board: "ywco",
+    kicker: "Class & pool schedule · clock-driven",
+    body: "A rec-center board: every class, instructor and pool block on it is real, and the panel follows the clock through the day.",
+  },
+  {
+    board: "jittery-joes",
+    kicker: "Café offers · partner panel",
+    body: "Rotating offers, the coffee menu, and a small partner panel for local businesses the café approves.",
+  },
+];

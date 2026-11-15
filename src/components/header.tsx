@@ -9,7 +9,7 @@ import { Logo } from "./logo";
 
 function DesktopItem({ item }: { item: NavItem }) {
   const linkClasses =
-    "flex items-center gap-1 rounded-lg px-3 py-2 text-[15px] font-medium text-ink-900/80 transition-colors hover:bg-slate-100 hover:text-ink-900";
+    "flex items-center gap-1 whitespace-nowrap rounded-lg px-3 py-2 text-[15px] font-medium text-ink-900/80 transition-colors hover:bg-slate-100 hover:text-ink-900";
 
   if (!item.children) {
     return (
@@ -58,7 +58,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line/80 bg-white/90 backdrop-blur-md">
-      <div className="mx-auto flex h-[4.75rem] max-w-[76rem] items-center gap-6 px-5 sm:px-8">
+      <div className="mx-auto flex h-[4.75rem] max-w-[80rem] items-center gap-5 px-5 sm:px-8">
         <Logo onClick={close} />
 
         <nav className="hidden flex-1 items-center gap-0.5 xl:flex" aria-label="Main">
@@ -68,7 +68,7 @@ export function Header() {
         </nav>
 
         <div className="ml-auto hidden items-center gap-4 xl:flex">
-          <a href={brand.phoneHref} className="text-[15px] font-semibold tabular-nums text-ink-900/80 hover:text-ink-900">
+          <a href={brand.phoneHref} className="whitespace-nowrap text-[15px] font-semibold tabular-nums text-ink-900/80 hover:text-ink-900">
             {brand.phone}
           </a>
           <Button as="link" href={brand.primaryCta.href} size="sm">

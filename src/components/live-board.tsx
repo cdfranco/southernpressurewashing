@@ -23,6 +23,7 @@ type LiveBoardProps = {
 export function LiveBoard({ src, poster, title, portrait, label = "Live now", stand, className }: LiveBoardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [mode, setMode] = useState<"poster" | "manual" | "live">("poster");
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -54,7 +55,15 @@ export function LiveBoard({ src, poster, title, portrait, label = "Live now", st
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={poster} alt="" className="absolute inset-0 h-full w-full object-cover" />
         {mode === "live" && (
-          <iframe key={src} src={src} title={title} loading="lazy" tabIndex={-1} className="absolute inset-0 h-full w-full border-0 bg-black" />
+          <iframe
+            key={src}
+            src={src}
+            title={title}
+            loading="lazy"
+            tabIndex={-1}
+            onLoad={() => setLoaded(true)}
+            className={`absolute inset-0 h-full w-full border-0 transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
+          />
         )}
         {mode === "manual" && (
           <div className="absolute inset-0 grid place-items-center bg-ink-950/35">

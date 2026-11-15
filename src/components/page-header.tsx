@@ -16,7 +16,7 @@ type PageHeaderProps = {
 export function PageHeader({ kicker, title, description, actions, aside, children }: PageHeaderProps) {
   return (
     <section className="bg-hero relative overflow-hidden border-b border-line/70">
-      <div className="mx-auto max-w-[76rem] px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:pb-20 lg:pt-24">
+      <div className="mx-auto max-w-[80rem] px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:pb-20 lg:pt-24">
         <div className={aside ? "grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16" : ""}>
           <div className="flex max-w-3xl flex-col items-start gap-5">
             {kicker && <Kicker>{kicker}</Kicker>}

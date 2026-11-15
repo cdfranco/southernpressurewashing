@@ -28,7 +28,7 @@ export function Section({ id, tone = "paper", className = "", containerClassName
 }
 
 export function Container({ className = "", children }: { className?: string; children: ReactNode }) {
-  return <div className={`mx-auto max-w-[76rem] px-5 sm:px-8 ${className}`}>{children}</div>;
+  return <div className={`mx-auto max-w-[80rem] px-5 sm:px-8 ${className}`}>{children}</div>;
 }
 
 /** Small uppercase label above a heading. */
