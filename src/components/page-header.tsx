@@ -1,55 +1,35 @@
+import { ReactNode } from "react";
+import { Kicker } from "./section";
+
 type PageHeaderProps = {
-  eyebrow: string;
-  title: string;
-  titleAccent?: string;
-  description?: string;
+  kicker?: string;
+  title: ReactNode;
+  description?: ReactNode;
+  actions?: ReactNode;
+  /** Optional visual shown to the right of the copy on wide screens. */
+  aside?: ReactNode;
+  /** Optional full-width content under the copy (stat rows, pickers). */
+  children?: ReactNode;
 };
 
-export function PageHeader({ eyebrow, title, titleAccent, description }: PageHeaderProps) {
-  const renderTitle = () => {
-    if (!titleAccent) return <span>{title}</span>;
-    const idx = title.indexOf(titleAccent);
-    if (idx === -1) return <span>{title}</span>;
-    return (
-      <>
-        {title.slice(0, idx)}
-        <span className="bg-gradient-to-r from-sky-400 to-cyan-300 bg-clip-text text-transparent">
-          {titleAccent}
-        </span>
-        {title.slice(idx + titleAccent.length)}
-      </>
-    );
-  };
-
+/** Top-of-page hero used by every inner page. */
+export function PageHeader({ kicker, title, description, actions, aside, children }: PageHeaderProps) {
   return (
-    <div className="relative overflow-hidden border-b border-slate-800 bg-slate-950 px-4 pb-14 pt-16 sm:px-6 sm:pb-16 sm:pt-20">
-      {/* Dot grid texture */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-40"
-        style={{
-          backgroundImage: "radial-gradient(circle, rgba(56,189,248,0.12) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }}
-      />
-      {/* Fade dot grid toward center bottom */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_100%,transparent,#020617_65%)]" />
-
-      <div className="relative mx-auto max-w-6xl">
-        <div className="flex items-center gap-3">
-          <span className="h-px w-8 rounded-full bg-gradient-to-r from-sky-400 to-cyan-300" />
-          <p className="text-xs font-semibold uppercase tracking-widest text-sky-400">{eyebrow}</p>
+    <section className="bg-hero relative overflow-hidden border-b border-line/70">
+      <div className="mx-auto max-w-[76rem] px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:pb-20 lg:pt-24">
+        <div className={aside ? "grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16" : ""}>
+          <div className="flex max-w-3xl flex-col items-start gap-5">
+            {kicker && <Kicker>{kicker}</Kicker>}
+            <h1 className="text-[2.4rem] font-extrabold leading-[1.08] tracking-[-0.03em] sm:text-5xl lg:text-[3.6rem] lg:leading-[1.06]">
+              {title}
+            </h1>
+            {description && <p className="max-w-2xl text-lg leading-relaxed text-ink-900/75 sm:text-xl">{description}</p>}
+            {actions && <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap sm:items-center">{actions}</div>}
+          </div>
+          {aside && <div>{aside}</div>}
         </div>
-
-        <h1 className="mt-4 text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
-          {renderTitle()}
-        </h1>
-
-        {description && (
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg">
-            {description}
-          </p>
-        )}
+        {children && <div className="mt-12">{children}</div>}
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,31 +1,41 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { WhatsAppButton } from "@/components/whatsapp-button";
-import { business } from "@/content/site";
+import { brand } from "@/content/site";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta", display: "swap" });
 
 export const metadata: Metadata = {
-  title: `${business.name} | Professional Pressure Washing`,
-  description:
-    "Southern Pressure Washing provides professional, insured pressure washing for homes and businesses with a focus on safety, care, and lasting curb appeal.",
-  openGraph: {
-    title: `${business.name} | Professional Pressure Washing`,
-    description:
-      "Refresh your exterior surfaces with gentle, effective pressure washing from a trusted local team.",
-    siteName: business.name,
+  metadataBase: new URL(brand.url),
+  title: {
+    default: `${brand.name} — Digital menu boards and lobby screens, designed, installed and kept current`,
+    template: `%s | ${brand.name}`,
   },
+  description: brand.metaDescription,
+  openGraph: {
+    title: `${brand.name} — Digital boards, designed, installed and kept current`,
+    description: brand.ogDescription,
+    siteName: brand.name,
+    type: "website",
+    images: ["/img/mamas-boy-lg.webp"],
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: brand.name,
+  url: brand.url,
+  telephone: brand.phoneE164,
+  email: brand.email,
+  founder: { "@type": "Person", name: brand.founder },
+  address: { "@type": "PostalAddress", addressLocality: "Athens", addressRegion: "GA", addressCountry: "US" },
+  areaServed: "US",
+  description:
+    "Branded digital menu boards and lobby screens: designed, installed and kept current, for independents and multi-location chains.",
 };
 
 export default function RootLayout({
@@ -34,16 +44,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 text-slate-100`}
-      >
+    <html lang="en" className={`${inter.variable} ${jakarta.variable}`}>
+      <body className="bg-paper font-sans text-body">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+        >
+          Skip to content
+        </a>
         <div className="flex min-h-screen flex-col">
           <Header />
-          <main className="flex-1">{children}</main>
+          <main id="main" className="flex-1">
+            {children}
+          </main>
           <Footer />
-          <WhatsAppButton />
         </div>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
       </body>
     </html>
   );

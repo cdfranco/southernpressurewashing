@@ -1,177 +1,420 @@
-export const business = {
-  name: "Southern Pressure Washing",
-  phone: "(706) 614-6476",
-  phoneHref: "tel:+17066146476",
-  email: "info@southernpressurewashing.com",
-  serviceArea: ["Athens", "Watkinsville", "Bogart", "Jefferson", "Commerce", "Monroe", "Winder", "Madison", "Gainesville"],
+/**
+ * Athena Boards — shared site content.
+ *
+ * Brand details, navigation, the board portfolio and the published prices live
+ * here so every page reads the same numbers. Page-specific copy lives next to
+ * the page that uses it.
+ */
+
+export const brand = {
+  name: "Athena Boards",
+  legalName: "Athena Boards (Franco Creative Agency)",
+  url: "https://athena-boards.vercel.app",
+  tagline: "Digital boards · designed, installed, kept current",
+  metaDescription:
+    "Athena Boards designs a branded digital board for your business, installs the screen, and keeps it current under a monthly care plan. Installed packages from $950, or $500 on a TV you already own. One screen for a café or one system for hundreds of locations.",
+  ogDescription:
+    "Your menu, your specials, your brand — on a screen that runs itself. Installed packages from $950. Care plans from $49/month. You see your board before you pay.",
+  footerBlurb:
+    "Branded digital boards for the businesses on your street and the chains on every street — designed, installed and kept current by us.",
+  phone: "(706) 521-4024",
+  phoneHref: "tel:+17065214024",
+  phoneE164: "+17065214024",
+  email: "cdfranco@gmail.com",
+  founder: "Caleb Franco",
+  location: "Athens, Georgia",
+  serviceArea: "Athens, Georgia · serving Atlanta and the Southeast · chain rollouts nationwide",
+  primaryCta: { label: "Get your free draft board", href: "/contact" },
 };
 
-export const navigation = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Gallery", href: "/gallery" },
-  { label: "FAQs", href: "/faqs" },
-  { label: "Contact", href: "/contact" },
+export type NavLink = { label: string; href: string; description?: string };
+export type NavItem = { label: string; href: string; children?: NavLink[] };
+
+export const navigation: NavItem[] = [
+  {
+    label: "How it works",
+    href: "/how-it-works",
+    children: [
+      { label: "Design", href: "/how-it-works#design", description: "We start from your brand, not from a template." },
+      { label: "Equipment", href: "/how-it-works#equipment", description: "Hardware chosen for walls that run all day." },
+      { label: "Software", href: "/how-it-works#software", description: "Built to run for years without a hand on it." },
+      { label: "After go-live", href: "/how-it-works#after", description: "Text us the change. That's the whole process." },
+    ],
+  },
+  {
+    label: "Pricing",
+    href: "/pricing",
+    children: [
+      { label: "Packages", href: "/pricing#packages", description: "Design, display, mount and installation. One-time." },
+      { label: "Care plans", href: "/pricing#plans", description: "Keeps it running and current, from $49 a month." },
+      { label: "Chain pricing", href: "/pricing#chains", description: "One price per location, with a rollout calculator." },
+      { label: "Change fees", href: "/pricing#changes", description: "If it isn't in your plan, it's on this list." },
+    ],
+  },
+  { label: "Chains & franchises", href: "/franchise" },
+  { label: "Our work", href: "/work" },
+  {
+    label: "Company",
+    href: "/about",
+    children: [
+      { label: "About", href: "/about", description: "Built in Athens, Georgia. Built to roll out." },
+      { label: "Security & trust", href: "/trust", description: "Written for IT, Legal and Purchasing." },
+      { label: "Contact", href: "/contact", description: "Tell us about the wall." },
+    ],
+  },
 ];
 
-export const heroContent = {
-  eyebrow: "Professional • Reliable • Local",
-  title: "Make your home look new again.",
-  subtitle:
-    "Soft, safe exterior cleaning for siding, roofs, and concrete — without damaging your home.",
-  primaryCta: "Call Now",
-  secondaryCta: "Get a Free Quote",
+export const footerColumns: { heading: string; links: NavLink[] }[] = [
+  {
+    heading: "Product",
+    links: [
+      { label: "How it works", href: "/how-it-works" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Care plans", href: "/pricing#plans" },
+      { label: "Equipment", href: "/how-it-works#equipment" },
+    ],
+  },
+  {
+    heading: "Company",
+    links: [
+      { label: "About", href: "/about" },
+      { label: "Security & trust", href: "/trust" },
+      { label: "Our work", href: "/work" },
+      { label: "Chains & franchises", href: "/franchise" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
+  {
+    heading: "Live demo boards",
+    links: [
+      { label: "Restaurant specials board", href: "https://lalos-tacos-cantina-board.vercel.app" },
+      { label: "Breakfast menu board", href: "https://mamas-boy-board.vercel.app" },
+      { label: "Rec-center schedule board", href: "https://ywco-board.vercel.app" },
+      { label: "Portrait photo board", href: "https://kiques-kitchen-portrait-board.vercel.app" },
+    ],
+  },
+];
+
+export const footerDisclaimer =
+  "Demo boards show each business's public menu and brand for illustration. Names and marks belong to their owners; a demo is not an endorsement.";
+
+/* ── Portfolio ─────────────────────────────────────────────────────── */
+
+export type BoardCategory = "restaurants" | "coffee" | "services";
+
+export type Board = {
+  slug: string;
+  name: string;
+  /** Caption shown on the Our work page. */
+  caption: string;
+  alt: string;
+  category: BoardCategory;
+  /** Live board URL. Boards without one are private previews shown as screenshots. */
+  liveUrl?: string;
+  portrait?: boolean;
 };
 
-export const services = [
+export const boardCategories: { id: BoardCategory; kicker: string; heading: string; short: string }[] = [
+  { id: "restaurants", kicker: "Restaurants", heading: "Specials that know what day it is.", short: "Restaurants" },
   {
-    id: "house-washing",
-    name: "House Washing",
-    summary: "Gentle, effective soft washing for siding, brick, and stucco.",
-    details:
-      "We use low-pressure soft washing to lift away dirt, mildew, and algae without damaging your home’s exterior surfaces.",
+    id: "coffee",
+    kicker: "Coffee, chocolate & baking",
+    heading: "Menus that look like the bag on the shelf.",
+    short: "Coffee & bakeries",
   },
   {
-    id: "driveway-cleaning",
-    name: "Driveways & Sidewalks",
-    summary: "Brighten stained concrete, pavers, and walkways.",
-    details:
-      "Oil stains, tire marks, and years of grime don’t stand a chance. We restore a clean, even look to your hard surfaces.",
-  },
-  {
-    id: "roof-cleaning",
-    name: "Roof Cleaning",
-    summary: "Safe soft washing for shingle, tile, and metal roofs.",
-    details:
-      "Remove black streaks, moss, and organic growth while protecting your roof with manufacturer-recommended methods.",
-  },
-  {
-    id: "deck-patio",
-    name: "Decks & Patios",
-    summary: "Make your outdoor spaces inviting again.",
-    details:
-      "We carefully clean wood, composite, and stone to remove slippery buildup and prepare surfaces for sealing or staining.",
-  },
-  {
-    id: "commercial",
-    name: "Commercial Properties",
-    summary: "Keep your business looking clean and professional.",
-    details:
-      "Storefronts, parking lots, walkways, and more. Flexible scheduling to minimize disruption to your customers.",
+    id: "services",
+    kicker: "Services, schedules & visitors",
+    heading: "Not every wall is a menu.",
+    short: "Services & schedules",
   },
 ];
 
-export const processSteps = [
+export const boards: Board[] = [
   {
-    title: "Request your free quote",
-    description: "Share a few details about your property and the surfaces you need cleaned.",
+    slug: "mamas-boy",
+    name: "Mama's Boy at the Falls",
+    caption: "Live · diner menu · every price from the printed menu",
+    alt: "Mama's Boy board: featured breakfast dish, menu with published prices, live open/closed badge",
+    category: "restaurants",
+    liveUrl: "https://mamas-boy-board.vercel.app/",
   },
   {
-    title: "Schedule a convenient time",
-    description: "We work around your schedule and clearly confirm your appointment window.",
+    slug: "lalos",
+    name: "LALO's Tacos & Cantina",
+    caption: "Live · weekly specials · partner panel",
+    alt: "LALO's Tacos & Cantina board: featured dish, weekly specials grid with today highlighted, partner panel",
+    category: "restaurants",
+    liveUrl: "https://lalos-tacos-cantina-board.vercel.app/",
   },
   {
-    title: "Enjoy a like-new clean",
-    description: "We arrive on time, work carefully, and leave your property noticeably brighter.",
+    slug: "first-watch",
+    name: "First Watch — concept board",
+    caption: "Live · not a customer · 678 stores from one file",
+    alt: "First Watch concept board: seasonal features, menu prices from the store's public ordering menu, waitlist prompt",
+    category: "restaurants",
+    liveUrl: "https://first-watch-board.vercel.app/",
+  },
+  {
+    slug: "agua-linda",
+    name: "Agua Linda",
+    caption: "Live · two locations, one board",
+    alt: "Agua Linda board: featured dishes, lunch specials and hours for two locations",
+    category: "restaurants",
+    liveUrl: "https://agua-linda-board.vercel.app/",
+  },
+  {
+    slug: "kiques",
+    name: "Kique's Kitchen",
+    caption: "Live · birria menu · Friday specials",
+    alt: "Kique's Kitchen board: birria menu with prices, Friday specials strip",
+    category: "restaurants",
+    liveUrl: "https://kiques-kitchen-board.vercel.app/",
+  },
+  {
+    slug: "kiques-portrait",
+    name: "Kique's Kitchen — portrait",
+    caption: "Live · 43\" upright · chosen by the restaurant",
+    alt: "Kique's Kitchen portrait board: full-bleed dish photo, weekly specials with today highlighted, partner panel",
+    category: "restaurants",
+    liveUrl: "https://kiques-kitchen-portrait-board.vercel.app/",
+    portrait: true,
+  },
+  {
+    slug: "los-plebes",
+    name: "Tacos Los Plebes",
+    caption: "Live · bilingual · meat × style price grid",
+    alt: "Tacos Los Plebes board: bilingual price grid of meats by style, clock and weather in the header",
+    category: "restaurants",
+    liveUrl: "https://tacos-los-plebes-board.vercel.app/",
+  },
+  {
+    slug: "cali-n-titos",
+    name: "Cali-N-Tito's",
+    caption: "Live · two locations · Cuban & Peruvian menu",
+    alt: "Cali-N-Tito's board: Cuban and Peruvian menu with prices, two-location switch",
+    category: "restaurants",
+    liveUrl: "https://cali-n-titos-board.vercel.app/",
+  },
+  {
+    slug: "farm-441",
+    name: "Farm 441 at Thomas Orchards",
+    caption: "Screenshot · private preview · farm store & weekend barbecue",
+    alt: "Farm 441 board: farm store hours, weekend barbecue menu with prices, pavilion rental",
+    category: "restaurants",
+  },
+  {
+    slug: "jittery-joes",
+    name: "Jittery Joe's Coffee",
+    caption: "Live · café offers · partner panel",
+    alt: "Jittery Joe's Coffee board: rotating offers, coffee menu, partner ad panel",
+    category: "coffee",
+    liveUrl: "https://jittery-joes-board.vercel.app/",
+  },
+  {
+    slug: "thousand-faces",
+    name: "1000 Faces Coffee",
+    caption: "Live · roaster · on-the-bar coffees",
+    alt: "1000 Faces Coffee board: drink menu, the four coffees on the bar, retail bags",
+    category: "coffee",
+    liveUrl: "https://thousand-faces-board.vercel.app/",
+  },
+  {
+    slug: "thousand-faces-portrait",
+    name: "1000 Faces — portrait",
+    caption: "Screenshot · private preview · behind-the-bar menu nook",
+    alt: "1000 Faces Coffee portrait board: full drink menu styled after the shop's letter boards",
+    category: "coffee",
+    portrait: true,
+  },
+  {
+    slug: "choco-coffee",
+    name: "Choco Coffee",
+    caption: "Screenshot · private preview · Ecuadorian roaster",
+    alt: "Choco Coffee board: Ecuadorian roaster's bags and café menu in a retro-pop style",
+    category: "coffee",
+  },
+  {
+    slug: "condor-chocolates",
+    name: "Condor Chocolates",
+    caption: "Screenshot · private preview · two shops",
+    alt: "Condor Chocolates board: chocolate counter prices and hours for two shops",
+    category: "coffee",
+  },
+  {
+    slug: "mollys-coffee",
+    name: "Molly's Coffee Company",
+    caption: "Screenshot · private preview · café menu",
+    alt: "Molly's Coffee Company board: café menu with prices and daily specials",
+    category: "coffee",
+  },
+  {
+    slug: "sips-espresso",
+    name: "Sips Espresso Café",
+    caption: "Screenshot · private preview · roasts its own",
+    alt: "Sips Espresso Café board: espresso menu and house-roasted coffee",
+    category: "coffee",
+  },
+  {
+    slug: "independent-baking",
+    name: "Independent Baking Co.",
+    caption: "Screenshot · private preview · day-of-week bake list",
+    alt: "Independent Baking Co. board: the day's bake list highlighted by weekday",
+    category: "coffee",
+  },
+  {
+    slug: "farm-441-instagram",
+    name: "Farm 441 — Instagram edition",
+    caption: "Screenshot · private preview · live social gallery panel",
+    alt: "Farm 441 Instagram edition board: a rotating gallery of the farm's own posts",
+    category: "coffee",
+  },
+  {
+    slug: "ywco",
+    name: "YWCO Athens",
+    caption: "Live · class & pool schedule · 5-day weather",
+    alt: "YWCO Athens board: today's class schedule, pool hours and a five-day forecast",
+    category: "services",
+    liveUrl: "https://ywco-board.vercel.app/",
+  },
+  {
+    slug: "visit-athens",
+    name: "Visit Athens GA",
+    caption: "Screenshot · private preview · events feed · gameday",
+    alt: "Visit Athens GA welcome center board: upcoming events, weather and game-day strip",
+    category: "services",
+  },
+  {
+    slug: "bulldog-laundry",
+    name: "Bulldog Laundry",
+    caption: "Live · services · pickup & delivery",
+    alt: "Bulldog Laundry board: services and prices, pickup and delivery panel, live weather",
+    category: "services",
+    liveUrl: "https://bulldog-laundry-board.vercel.app/",
   },
 ];
 
-export const testimonials = [
-  {
-    name: "Jordan P.",
-    location: "Athens, GA",
-    quote:
-      "Southern Pressure Washing made our driveway and siding look brand new. Professional, punctual, and very respectful of our property.",
-  },
-  {
-    name: "Heather M.",
-    location: "Watkinsville, GA",
-    quote:
-      "They did an amazing job on our roof and gutters. The difference was night and day and they explained every step of the process.",
-  },
-  {
-    name: "Stonebrook Apartments",
-    location: "Athens, GA",
-    quote:
-      "Our walkways and common areas look incredibly clean. Residents noticed the improvement immediately. Highly recommend for commercial work.",
-  },
-  {
-    name: "Marcus T.",
-    location: "Bogart, GA",
-    quote:
-      "Hired them to clean our back deck and patio before a family gathering. They were fast, friendly, and the results were outstanding.",
-  },
-  {
-    name: "Lisa K.",
-    location: "Monroe, GA",
-    quote:
-      "I was shocked at how much grime had built up on my home's exterior. After the wash it looked like a brand new house. Worth every penny.",
-  },
-  {
-    name: "Dave & Carol R.",
-    location: "Jefferson, GA",
-    quote:
-      "Responsive, professional, and reasonably priced. They cleaned our concrete driveway and sidewalks and we couldn't be happier with the results.",
-  },
-];
+export const boardBySlug = (slug: string): Board => {
+  const board = boards.find((b) => b.slug === slug);
+  if (!board) throw new Error(`Unknown board: ${slug}`);
+  return board;
+};
 
-export const faqs = [
-  {
-    question: "Is pressure washing safe for my siding and roof?",
-    answer:
-      "Yes. We use soft washing techniques with the appropriate pressure and detergents for each surface, following manufacturer guidelines to protect your home.",
-  },
-  {
-    question: "Do I need to be home during the service?",
-    answer:
-      "You don’t have to be home as long as we have access to the areas being cleaned and an outdoor water connection. We’ll confirm details with you in advance.",
-  },
-  {
-    question: "What areas do you service?",
-    answer:
-      "We serve Athens, GA and the surrounding area including Watkinsville, Bogart, Jefferson, Commerce, Monroe, Winder, Madison, Gainesville, and nearby communities. Contact us if you’re unsure and we’ll confirm.",
-  },
-  {
-    question: "How often should I have my home pressure washed?",
-    answer:
-      "Most homes benefit from a full exterior cleaning every 1–2 years, depending on shade, humidity, and tree coverage around your property.",
-  },
-  {
-    question: "Are you insured?",
-    answer:
-      "Yes, Southern Pressure Washing is fully insured so you can feel confident inviting us to work on your property.",
-  },
-];
+export const boardImage = (slug: string, size: "sm" | "lg" = "sm") => `/img/${slug}-${size}.webp`;
 
-export const galleryItems = [
-  {
-    id: "driveway-1",
-    title: "Driveway cleaning",
-    description: "Years of stains lifted from a concrete driveway.",
-    imageUrl: "/gallery/driveway-before-after.png",
-    alt: "Worker using a surface cleaner on a stained concrete driveway.",
-  },
-  {
-    id: "house-1",
-    title: "House wash",
-    description: "Siding restored to a bright, even finish.",
-    imageUrl: "/gallery/house-wash.png",
-    alt: "Pressure washing siding on a two-story house.",
-  },
-  {
-    id: "patio-1",
-    title: "Patio refresh",
-    description: "Mildew and grime removed from a backyard patio.",
-    imageUrl: "/gallery/patio-clean.png",
-    alt: "Clean backyard patio with outdoor furniture after washing.",
-  },
-  {
-    id: "roof-1",
-    title: "Roof soft wash",
-    description: "Black streaks and algae removed safely from shingles.",
-    imageUrl: "/gallery/house-prep.png",
-    alt: "Technician cleaning a house roof with soft wash equipment.",
-  },
-];
+/* ── Multi-location concept demo (store picker) ────────────────────── */
 
+export const fleetDemo = {
+  baseUrl: "https://first-watch-board.vercel.app/",
+  label: "Choose a First Watch store",
+  hint: "Pick a store — address, weather and prices follow.",
+  groups: [
+    {
+      label: "Georgia — per-store prices loaded",
+      stores: [
+        ["athens", "Athens, GA"],
+        ["windward-parkway", "Windward Parkway · Alpharetta, GA"],
+        ["madison-yards", "Madison Yards · Atlanta, GA"],
+        ["perimeter", "Perimeter · Atlanta, GA"],
+        ["crane-creek", "Crane Creek · Augusta, GA"],
+        ["braselton", "Braselton, GA"],
+        ["buford", "Buford, GA"],
+        ["chamblee", "Chamblee, GA"],
+        ["columbus", "Columbus, GA"],
+        ["midland", "Midland · Columbus, GA"],
+        ["cumming", "Cumming, GA"],
+        ["dawsonville", "Dawsonville, GA"],
+        ["decatur", "Decatur, GA"],
+        ["gainesville", "Gainesville, GA"],
+        ["hinesville", "Hinesville, GA"],
+        ["johns-creek", "John's Creek, GA"],
+        ["barrett-parkway", "Barrett Parkway · Kennesaw, GA"],
+        ["kennesaw", "Kennesaw, GA"],
+        ["loganville", "Loganville, GA"],
+        ["east-cobb", "East Cobb · Marietta, GA"],
+        ["sandy-plains", "Sandy Plains · Marietta, GA"],
+        ["jodeco-road", "Jodeco Road · McDonough, GA"],
+        ["peachtree-corners", "Peachtree Corners, GA"],
+        ["pooler", "Pooler, GA"],
+        ["rome", "Rome, GA"],
+        ["vinings", "Vinings · Smyrna, GA"],
+        ["snellville", "Snellville, GA"],
+        ["tucker", "Tucker, GA"],
+      ],
+    },
+    {
+      label: "Elsewhere — address & weather (Athens prices until pulled)",
+      stores: [
+        ["bradenton", "Bradenton · Bradenton, FL"],
+        ["carrollwood", "Carrollwood · Tampa, FL"],
+        ["downtown-nashville", "Downtown Nashville · Nashville, TN"],
+        ["ballantyne", "Ballantyne · Charlotte, NC"],
+        ["shoal-creek", "Shoal Creek · Kansas City, MO"],
+        ["agua-fria", "Agua Fria · Phoenix, AZ"],
+        ["addison", "Addison · Dallas, TX"],
+      ],
+    },
+  ] as { label: string; stores: [string, string][] }[],
+  disclaimer:
+    "Concept board — built from First Watch's public menu; not a customer. Shown to demonstrate the system. Not affiliated with or endorsed by First Watch.",
+};
+
+/* ── Chain pricing bands (shared by the pricing table and the calculator) ── */
+
+export const chainPricing = {
+  bands: [
+    { min: 1, max: 9, once: 1500, monthly: 99, label: "1–9 locations (list)", tableLabel: "1–9 (pilot, list)" },
+    { min: 10, max: 49, once: 1450, monthly: 89, label: "10–49 locations", tableLabel: "10–49" },
+    { min: 50, max: 199, once: 1395, monthly: 79, label: "50–199 locations", tableLabel: "50–199" },
+    { min: 200, max: 599, once: 1295, monthly: 69, label: "200–599 locations", tableLabel: "200–599" },
+    { min: 600, max: 100000, once: 1195, monthly: 59, label: "600+ locations", tableLabel: "600+" },
+  ],
+  displayAdj: { pro43: 0, pro55: 400, byo: -650 } as Record<string, number>,
+  brandBuild: 4500,
+  brandBuildWaivedAt: 200,
+};
+
+/* ── The film: chapter timings match public/video/athena-boards-film.* ── */
+
+export const film = {
+  title: "Athena Boards in under a minute",
+  poster: "/video/athena-boards-film.jpg",
+  mp4: "/video/athena-boards-film.mp4",
+  webm: "/video/athena-boards-film.webm",
+  caption:
+    "From your menu to a screen on the wall. Boards shown in the film were designed for real Athens-area businesses; a demo is not an endorsement.",
+  chapters: [
+    {
+      id: "build",
+      step: "1",
+      label: "We build your board",
+      when: "Days 1–3 · no charge",
+      body: "Send us your website or menu. We design the board in your brand and send you a private link to review — on your phone, your laptop, or a TV in your dining room.",
+      clip: "/video/chapter-1-build",
+    },
+    {
+      id: "approve",
+      step: "2",
+      label: "You approve it",
+      when: "Days 3–5",
+      body: "Tell us what to fix — a price, a photo, a dish that's gone. One round of corrections is included. You accept a short, plain-English agreement on your phone and pay the one-time package fee.",
+      clip: "/video/chapter-2-approve",
+    },
+    {
+      id: "install",
+      step: "3",
+      label: "We install it",
+      when: "Days 7–14 · one visit",
+      body: "We deliver the display, mount it where we agreed, connect it to your Wi-Fi and bring the board live in one visit. Portrait or landscape. We leave the remote with the manager, behind the counter.",
+      clip: "/video/chapter-3-install",
+    },
+    {
+      id: "fresh",
+      step: "4",
+      label: "We keep it fresh",
+      when: "Every day after",
+      body: "Your care plan covers hosting, monitoring and content changes. Text us the change; it's live within your plan's turnaround. Seasonal menus switch themselves on the date you choose.",
+      clip: "/video/chapter-4-fresh",
+    },
+  ],
+};
