@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Standalone film stage and renderer (browser scripts + a Node script):
+    "video/**",
   ]),
 ]);
 

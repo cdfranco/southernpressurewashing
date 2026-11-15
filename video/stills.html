@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Athena Boards — venue still</title>
+<link rel="stylesheet" href="film.css">
+<style>
+  html, body { background: #0b1220; }
+  #still { position: absolute; inset: 0; }
+</style>
+</head>
+<body>
+<!-- Renders one illustrated venue as a 4:5 still. Options: ?v=cafe|taqueria|roastery|lobby &img=<board image> &up=1 -->
+<div id="still"></div>
+<script src="venues.js"></script>
+<script>
+  (async function () {
+    const q = new URLSearchParams(location.search);
+    const el = document.createElement("div");
+    el.className = "venue tall";
+    el.dataset.venue = q.get("v") || "cafe";
+    el.dataset.tv = q.get("img") || "../public/img/mamas-boy-lg.webp";
+    if (q.has("up")) el.dataset.up = "";
+    document.getElementById("still").appendChild(el);
+    window.buildStage(document);
+    await Promise.all([...document.images].map((img) => (img.complete ? null : new Promise((r) => (img.onload = img.onerror = r)))));
+    await document.fonts.ready;
+    window.__ready = true;
+  })();
+</script>
+</body>
+</html>

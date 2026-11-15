@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Athena Boards — film stage</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="film.css">
+</head>
+<body>
+
+<!-- Shared artwork -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <radialGradient id="g-plate" cx="50%" cy="42%" r="62%"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ece2cf"/></radialGradient>
+    <radialGradient id="g-cake" cx="42%" cy="36%" r="70%"><stop offset="0" stop-color="#f8cf85"/><stop offset=".62" stop-color="#e6a650"/><stop offset="1" stop-color="#c78230"/></radialGradient>
+    <radialGradient id="g-syrup" cx="45%" cy="40%" r="65%"><stop offset="0" stop-color="#b36a1c"/><stop offset="1" stop-color="#7a400d"/></radialGradient>
+    <radialGradient id="g-berry" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#6a7fd0"/><stop offset="1" stop-color="#25306b"/></radialGradient>
+    <linearGradient id="g-tort" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6dd9c"/><stop offset="1" stop-color="#e3b862"/></linearGradient>
+
+    <symbol id="i-mark" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#0B1220"/><rect x="12" y="16" width="40" height="26" rx="4" fill="none" stroke="#14B8D4" stroke-width="4"/><rect x="26" y="44" width="12" height="4" rx="2" fill="#14B8D4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.75l6 6 9-13.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-photo" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm0 5.25h.007v.008H3.75V12zm0 5.25h.007v.008H3.75v-.008z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-level" viewBox="0 0 24 24"><rect x="2.5" y="8" width="19" height="8" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.1"/><circle cx="12" cy="12" r="1.9" fill="currentColor"/><path d="M8.5 9.5v5M15.5 9.5v5" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="10" fill="#f4b43c"/><g stroke="#f4b43c" stroke-width="3.4" stroke-linecap="round"><path d="M24 4v6M24 38v6M4 24h6M38 24h6M9.9 9.9l4.2 4.2M33.9 33.9l4.2 4.2M9.9 38.1l4.2-4.2M33.9 14.1l4.2-4.2"/></g></symbol>
+    <symbol id="i-bird" viewBox="0 0 48 48"><path d="M9 28c0-9 7-16 16-16 3.5 0 6.4 1.2 8.6 3.1L41 13l-3.2 6.2c.8 1.9 1.2 3.9 1.2 6 0 8-6.5 13.8-15 13.8-3.4 0-6.4-.8-8.8-2.3L7 39l3.6-7.2C9.6 30.7 9 29.4 9 28z" fill="#17382e"/><circle cx="31" cy="20" r="2.1" fill="#fbf4e6"/><path d="M15 29c3.5 3 9 3.6 13.5.6" fill="none" stroke="#f4b43c" stroke-width="2.6" stroke-linecap="round"/></symbol>
+
+    <!-- Lemon ricotta pancakes, seen from above -->
+    <symbol id="dish-pancakes" viewBox="0 0 600 600">
+      <ellipse cx="306" cy="322" rx="262" ry="256" fill="rgba(0,0,0,.34)"/>
+      <circle cx="300" cy="300" r="256" fill="url(#g-plate)"/>
+      <circle cx="300" cy="300" r="212" fill="none" stroke="#e0d3ba" stroke-width="3"/>
+      <circle cx="282" cy="334" r="156" fill="#b8742a"/>
+      <circle cx="288" cy="322" r="154" fill="url(#g-cake)"/>
+      <circle cx="306" cy="304" r="146" fill="#cf8d3a"/>
+      <circle cx="310" cy="294" r="144" fill="url(#g-cake)"/>
+      <circle cx="298" cy="284" r="134" fill="#d69640" opacity=".7"/>
+      <circle cx="300" cy="274" r="132" fill="url(#g-cake)"/>
+      <path d="M232 226c40-46 124-44 158 6 30 44 12 104-34 122-10 28-44 40-68 22-40 8-86-22-88-66-2-34 12-62 32-84z" fill="url(#g-syrup)" opacity=".82"/>
+      <path d="M356 354c6 30-4 58-10 70-8 14-22 4-18-10 6-20 8-40 6-56z" fill="#7a400d" opacity=".8"/>
+      <ellipse cx="296" cy="268" rx="62" ry="52" fill="#fffdf6"/>
+      <path d="M252 262c14-22 44-30 66-18 16 9 22 28 10 40-12 12-34 10-40-4-4-10 4-20 14-18" fill="none" stroke="#e9e2d2" stroke-width="6" stroke-linecap="round"/>
+      <path d="M306 232l22-20 6 26z" fill="#f6dd5c"/><path d="M270 240l-8-26 26 8z" fill="#f6dd5c" opacity=".9"/>
+      <g fill="url(#g-berry)"><circle cx="372" cy="250" r="19"/><circle cx="398" cy="286" r="17"/><circle cx="222" cy="318" r="18"/><circle cx="246" cy="352" r="15"/><circle cx="352" cy="212" r="14"/></g>
+      <g fill="#fff" opacity=".7"><circle cx="366" cy="243" r="4"/><circle cx="393" cy="280" r="3.6"/><circle cx="217" cy="311" r="3.8"/></g>
+      <path d="M398 204c26-22 58-20 70-4-18 20-48 24-70 4z" fill="#3f9a57"/><path d="M398 204c22-6 46-6 70-4" stroke="#2c7541" stroke-width="3" fill="none"/>
+      <path d="M118 330a70 70 0 0 1 96-64l-30 72z" fill="#f7e06a"/><path d="M118 330a70 70 0 0 1 96-64" fill="none" stroke="#f1c232" stroke-width="10"/>
+      <g fill="#fff" opacity=".85"><circle cx="330" cy="180" r="3"/><circle cx="250" cy="196" r="2.6"/><circle cx="410" cy="330" r="2.8"/><circle cx="210" cy="260" r="2.4"/><circle cx="300" cy="400" r="2.8"/><circle cx="380" cy="380" r="2.2"/><circle cx="230" cy="390" r="2.4"/></g>
+    </symbol>
+
+    <!-- Fish tacos -->
+    <symbol id="dish-tacos" viewBox="0 0 300 210">
+      <rect width="300" height="210" fill="#16312a"/>
+      <ellipse cx="150" cy="116" rx="132" ry="84" fill="rgba(0,0,0,.35)"/>
+      <ellipse cx="150" cy="108" rx="130" ry="82" fill="url(#g-plate)"/>
+      <g>
+        <path d="M44 122a52 52 0 0 1 104 0z" fill="url(#g-tort)"/><path d="M52 118c10-22 30-34 44-34s34 12 44 34" fill="none" stroke="#7a4bc0" stroke-width="9" stroke-linecap="round" stroke-dasharray="4 9"/>
+        <path d="M60 116c8-16 22-24 36-24s28 8 36 24z" fill="#e9a646"/><circle cx="84" cy="104" r="6" fill="#e2553a"/><circle cx="106" cy="100" r="5" fill="#57b26a"/><circle cx="118" cy="110" r="5" fill="#e2553a"/>
+      </g>
+      <g transform="translate(104 14)">
+        <path d="M44 122a52 52 0 0 1 104 0z" fill="url(#g-tort)"/><path d="M52 118c10-22 30-34 44-34s34 12 44 34" fill="none" stroke="#7a4bc0" stroke-width="9" stroke-linecap="round" stroke-dasharray="4 9"/>
+        <path d="M60 116c8-16 22-24 36-24s28 8 36 24z" fill="#e9a646"/><circle cx="82" cy="106" r="6" fill="#57b26a"/><circle cx="102" cy="99" r="5" fill="#e2553a"/><circle cx="120" cy="109" r="5" fill="#fff"/>
+      </g>
+      <path d="M218 64a30 30 0 0 1 44 28l-34 6z" fill="#b9e07a"/><path d="M218 64a30 30 0 0 1 44 28" fill="none" stroke="#6ea83b" stroke-width="6"/>
+    </symbol>
+
+    <!-- Latte, seen from above -->
+    <symbol id="dish-latte" viewBox="0 0 300 240">
+      <rect width="300" height="240" fill="#3a2a1e"/>
+      <circle cx="150" cy="126" r="96" fill="rgba(0,0,0,.35)"/><circle cx="150" cy="118" r="96" fill="#fff"/><circle cx="150" cy="118" r="74" fill="#c08a52"/>
+      <path d="M150 70c-22 18-22 44 0 60 22-16 22-42 0-60zM150 132c-18 12-18 30 0 40 18-10 18-28 0-40z" fill="#f4e3c8"/>
+      <rect x="236" y="104" width="46" height="26" rx="13" fill="#fff"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div id="fit"><div id="stage">
+  <div id="bg"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><i class="blob b4"></i><div class="sheen"></div></div>
+
+  <!-- 1 · Request -->
+  <section class="scene" id="s1"><div class="cam">
+    <div class="abs glass card">
+      <div class="brandrow"><svg><use href="#i-mark"/></svg>Athena Boards</div>
+      <h2 class="h-display">Get your free draft board</h2>
+      <p class="sub">You see your board before you pay anything.</p>
+      <div class="field"><div class="label">Business or brand</div><div class="input focus"><span class="typed" data-text="Goldfinch Café"></span><i class="caret"></i></div></div>
+      <div class="field"><div class="label">Your website, or a photo of your menu</div>
+        <div class="drop"><svg><use href="#i-photo"/></svg>Drop your menu here
+          <div class="done"><span class="tick"><svg><use href="#i-check"/></svg></span>menu-photo.jpg</div></div></div>
+      <div class="btn-primary">Send — start my free draft <svg><use href="#i-arrow"/></svg></div>
+    </div>
+    <div class="abs paper"><div class="paper-sheet"><h5>MENU</h5><hr><i style="--w:62%"></i><i style="--w:48%"></i><i style="--w:70%"></i><i style="--w:54%"></i><i style="--w:66%"></i><i style="--w:44%"></i><i style="--w:58%"></i></div></div>
+  </div></section>
+
+  <!-- 2 · Design -->
+  <section class="scene" id="s2"><div class="cam">
+    <div class="abs glass rail">
+      <h3 class="h-display">Your brand</h3><p>Pulled from your site and menu</p>
+      <div class="row"><div class="label">Colors</div><div class="swatches"><i style="background:#17382e"></i><i style="background:#fbf4e6"></i><i style="background:#f4b43c"></i><i style="background:#e2553a"></i></div></div>
+      <div class="row"><div class="label">Typefaces</div><div class="types"><span><b style="font-family:Fraunces,serif;font-weight:800">Aa</b><small>Display</small></span><span><b style="font-family:Inter,sans-serif;font-weight:700">Aa</b><small>Menu text</small></span></div></div>
+      <div class="row"><div class="label">Photos</div><div class="photos"><span><svg viewBox="110 90 380 300" preserveAspectRatio="xMidYMid slice"><use href="#dish-pancakes"/></svg></span><span><svg viewBox="0 0 300 210" preserveAspectRatio="xMidYMid slice"><use href="#dish-tacos"/></svg></span><span><svg viewBox="0 0 300 240" preserveAspectRatio="xMidYMid slice"><use href="#dish-latte"/></svg></span></div></div>
+      <div class="row"><div class="label">Menu</div><div class="menuline"><svg><use href="#i-list"/></svg>32 items, real prices</div></div>
+    </div>
+    <div class="frame"><div class="screen">
+      <div class="board-wrap" data-board></div>
+      <div class="wire" style="left:2.7%;top:15.5%;width:55%;height:53%"></div>
+      <div class="wire" style="left:59.5%;top:15.5%;width:37.6%;height:72.5%"></div>
+      <div class="wire" style="left:2.7%;top:71.3%;width:55%;height:16.7%"></div>
+    </div></div>
+    <div class="abs chip good badge"><span class="tick" style="background:#fff;color:#16a34a"><svg><use href="#i-check"/></svg></span>Draft ready</div>
+    <div class="abs chip dark badge2">Day 3 · no charge</div>
+  </div></section>
+
+  <!-- 3 · Approve -->
+  <section class="scene" id="s3"><div class="cam">
+    <div class="frame"><div class="screen"><div class="board-wrap" data-board></div></div></div>
+    <div class="halo" id="s3-halo"></div>
+    <div class="pin" id="s3-pin"><span class="num">1</span></div>
+    <div class="pin ok" id="s3-pin-ok"><svg><use href="#i-check"/></svg></div>
+    <div class="note" id="s3-note"><span class="typed" data-text="Pancakes are $12 now"></span></div>
+    <div class="abs chip dark toast"><svg><use href="#i-cal"/></svg>Install booked · Days 7–14</div>
+    <div class="phone"><div class="phone-screen"><div class="phone-notch"></div><div class="phone-status"><span>9:41</span><span>5G</span></div>
+      <div class="phone-body">
+        <div class="p-head"><svg><use href="#i-mark"/></svg><div><b>Your draft board</b><span>Private link · only you can see it</span></div></div>
+        <div class="p-thumb"><div class="board-wrap" data-board></div></div>
+        <div class="p-seg"><span class="on">Phone</span><span>Laptop</span><span>TV</span></div>
+        <div class="p-card"><h4>Corrections</h4><p>One round is included</p>
+          <div class="p-line corr"><span>1 · Pancakes are $12 now</span><em><svg><use href="#i-check"/></svg>Fixed</em></div></div>
+        <div class="p-sum">
+          <div><span>Agreement</span><b class="sum-ok" style="color:#15803d">Accepted</b></div>
+          <div><span>Local 43 package</span><b class="sum-ok" style="color:#15803d">$950 · paid</b></div>
+        </div>
+        <div class="p-btn"><div class="a">Approve board</div><div class="b"><svg><use href="#i-check"/></svg>Approved</div></div>
+      </div></div></div>
+  </div></section>
+
+  <!-- 4 · Install -->
+  <section class="scene" id="s4"><div class="cam"><div class="venue" data-venue="cafe" data-tv="board" data-install></div></div>
+    <div class="abs chip hint h-level" style="left:84px;top:300px"><svg style="color:#0b6f81"><use href="#i-level"/></svg>Mounted and level</div>
+    <div class="abs chip hint h-wifi" style="left:1560px;top:300px"><svg style="color:#0b6f81"><use href="#i-wifi"/></svg>On your Wi-Fi</div>
+    <div class="abs chip hint h-live" style="left:1560px;top:300px"><span class="dot"></span>Live</div>
+  </section>
+
+  <!-- 5 · Venues -->
+  <section class="scene" id="s5">
+    <div class="cam" id="v-taq"><div class="venue" data-venue="taqueria" data-tv="../public/img/lalos-lg.webp"></div></div>
+    <div class="cam" id="v-roast"><div class="venue" data-venue="roastery" data-tv="../public/img/thousand-faces-portrait-lg.webp" data-up></div></div>
+    <div class="cam" id="v-lobby"><div class="venue" data-venue="lobby" data-tv="../public/img/ywco-lg.webp"></div></div>
+    <div class="abs chip dark label5" style="right:64px;top:60px">Real boards, built in Athens, Georgia</div>
+  </section>
+
+  <!-- 6 · Keep it fresh -->
+  <section class="scene" id="s6">
+    <div class="cam"><div class="venue" data-venue="cafe" data-tv="board" style="--tv-x:65.5%;--tv-w:94cqh;--tv-top:12cqh"></div></div>
+    <div class="dim"></div>
+    <div class="abs chip good hint toast6" style="left:1420px;top:52px"><span class="tick" style="background:#fff;color:#16a34a"><svg><use href="#i-check"/></svg></span>Live on your screen</div>
+    <div class="abs care" style="left:760px;top:800px;display:flex;gap:16px">
+      <div class="chip">Hosting</div><div class="chip">Monitoring</div><div class="chip">Content changes</div><div class="chip dark">Care plans from $49 a month</div>
+    </div>
+    <div class="phone"><div class="phone-screen"><div class="phone-notch"></div><div class="phone-status"><span>2:14</span><span>5G</span></div>
+      <div class="phone-body">
+        <div class="m-head"><svg><use href="#i-mark"/></svg><b>Athena Boards</b></div>
+        <div class="m-thread">
+          <div class="bubble me" id="m-me"><span class="typed" data-text="Friday: fish tacos $12, photo attached."></span></div>
+          <div class="bubble me pic" id="m-pic"><svg viewBox="0 0 300 210" preserveAspectRatio="xMidYMid slice"><use href="#dish-tacos"/></svg></div>
+          <div class="bubble them" id="m-them1">On it.</div>
+          <div class="bubble them" id="m-them2">Done — it&rsquo;s on your screen.</div>
+        </div>
+        <div class="m-compose">Text message</div>
+      </div></div></div>
+  </section>
+
+  <!-- 7 · End card -->
+  <section class="scene" id="s7">
+    <div class="lockup"><svg><use href="#i-mark"/></svg>Athena Boards</div>
+    <h1><span class="l1" style="display:block">Your menu, your specials, your brand</span><span class="l2" style="display:block">on a screen that <em>runs itself.</em></span></h1>
+    <div class="row"><div class="cta">Get your free draft board <svg><use href="#i-arrow"/></svg></div><div class="tel">(706) 521-4024</div></div>
+    <p class="fine">$0 due until you&rsquo;ve seen your board</p>
+  </section>
+
+  <!-- Chapter chips -->
+  <div class="chapter" id="ch1"><b>1</b><span>We build your board</span><i>Days 1–3 · no charge</i></div>
+  <div class="chapter" id="ch2"><b>2</b><span>You approve it</span><i>Days 3–5</i></div>
+  <div class="chapter" id="ch3"><b>3</b><span>We install it</span><i>Days 7–14 · one visit</i></div>
+  <div class="chapter" id="ch4"><b>4</b><span>We keep it fresh</span><i>Every day after</i></div>
+
+  <!-- Captions -->
+  <div class="cap" id="c1a"><span>Send us your website or a photo of your menu.</span></div>
+  <div class="cap" id="c1b"><span>We design the board <em>in your brand</em>, at our cost.</span></div>
+  <div class="cap" id="c2a"><span>You get a private link to your draft.</span></div>
+  <div class="cap" id="c2b"><span>One round of corrections is included.</span></div>
+  <div class="cap" id="c2c"><span>Approve it, and we book your install.</span></div>
+  <div class="cap" id="c3a"><span>We mount the screen and bring it live <em>in one visit.</em></span></div>
+  <div class="cap" id="c3b"><span>Landscape or portrait. Counters, dining rooms, lobbies.</span></div>
+  <div class="cap" id="c4a"><span>Text us the change. <em>That&rsquo;s the whole process.</em></span></div>
+
+  <div id="cursor"><div class="ring"></div><svg viewBox="0 0 32 32"><path d="M4 3l22 10.5-9.2 2.9L13.6 26z" fill="#fff" stroke="#0b1220" stroke-width="2.2" stroke-linejoin="round"/></svg></div>
+</div></div>
+
+<script src="venues.js"></script>
+<script src="film.js"></script>
+</body>
+</html>
