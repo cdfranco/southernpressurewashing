@@ -384,7 +384,7 @@ export const film = {
   /** Total length in seconds. */
   duration: 41,
   caption:
-    "The café in the film is a made-up example. The boards on the other walls were designed for real Athens-area businesses; a demo is not an endorsement.",
+    "The café in the film is a made-up example, and the rooms are computer-generated mockups. The boards on the other walls were designed for real Athens-area businesses; a demo is not an endorsement.",
   chapters: [
     {
       id: "build",
@@ -421,12 +421,12 @@ export const film = {
   ],
 };
 
-/* ── Home page: hero slides (illustrated venues with real boards on screen) ── */
+/* ── Home page: hero slides (room mockups with real boards on screen; the rooms are generated images) ── */
 
 export const heroSlides = [
   {
     image: "/img/scenes/cafe.webp",
-    alt: "Illustration of a café wall with a mounted screen showing the Mama's Boy breakfast board",
+    alt: "Mockup of a café wall with a mounted screen showing the Mama's Boy breakfast board",
     board: "mamas-boy",
     value: 21,
     prefix: "",
@@ -435,7 +435,7 @@ export const heroSlides = [
   },
   {
     image: "/img/scenes/taqueria.webp",
-    alt: "Illustration of a taquería wall with a mounted screen showing the LALO's weekly specials board",
+    alt: "Mockup of a taquería wall with a mounted screen showing the LALO's weekly specials board",
     board: "lalos",
     value: 30,
     prefix: "",
@@ -444,7 +444,7 @@ export const heroSlides = [
   },
   {
     image: "/img/scenes/roastery.webp",
-    alt: "Illustration of a coffee bar with an upright screen showing the 1000 Faces menu board",
+    alt: "Mockup of a coffee bar with an upright screen showing the 1000 Faces menu board",
     board: "thousand-faces",
     value: 0,
     prefix: "$",
@@ -453,7 +453,7 @@ export const heroSlides = [
   },
   {
     image: "/img/scenes/lobby.webp",
-    alt: "Illustration of a rec-center lobby with a mounted screen showing the YWCO class schedule board",
+    alt: "Mockup of a rec-center lobby with a mounted screen showing the YWCO class schedule board",
     board: "ywco",
     value: 12,
     prefix: "",

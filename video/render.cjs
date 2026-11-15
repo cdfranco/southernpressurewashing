@@ -83,7 +83,7 @@ async function renderFilm() {
   }
 }
 
-/** Hero photos: each venue as a 4:5 still with a real board on the screen. */
+/** Hero photos: each room as a 4:5 still with a real board on the screen. */
 const STILLS = [
   { name: "cafe", venue: "cafe", board: "mamas-boy" },
   { name: "taqueria", venue: "taqueria", board: "lalos" },
@@ -94,7 +94,8 @@ const STILLS = [
 async function renderStills() {
   fs.mkdirSync(STILLS_OUT, { recursive: true });
   const browser = await launch();
-  const page = await (await browser.newContext({ viewport: { width: 1040, height: 1300 }, deviceScaleFactor: 1 })).newPage();
+  // The room photos are 1024×1280; rendering at 1.5× keeps the board text sharp on dense screens.
+  const page = await (await browser.newContext({ viewport: { width: 1024, height: 1280 }, deviceScaleFactor: 1.5 })).newPage();
   for (const s of STILLS) {
     const q = new URLSearchParams({ v: s.venue, img: `../public/img/${s.board}-lg.webp`, ...(s.up ? { up: "1" } : {}) });
     await page.goto("file://" + path.join(__dirname, "stills.html") + "?" + q, { waitUntil: "load" });

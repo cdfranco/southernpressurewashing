@@ -50,11 +50,12 @@ Fonts (Inter and Plus Jakarta Sans) are loaded with `next/font/google`, which se
 
 ## The film
 
-`public/video/athena-boards-film.mp4` (and `.webm`, `.jpg`) is an original 41-second motion-graphics film of the four-step process. It is not screen-recorded: it is drawn in HTML and CSS and rendered frame by frame, so it can be edited like code.
+`public/video/athena-boards-film.mp4` (and `.webm`, `.jpg`) is an original 41-second motion-graphics film of the four-step process. It is not screen-recorded: the interface, the boards and the motion are drawn in HTML and CSS over room photographs and rendered frame by frame, so it can be edited like code.
 
 - `video/film.html`, `film.css` — the 1920×1080 stage: scenes, the demo board, phone, captions.
 - `video/film.js` — the timeline. Every element is driven from one clock by keyframes, e.g. `A("#s3 .phone", { opacity: [[10.05, 0], [10.5, 1]] })`.
-- `video/venues.js` — the illustrated interiors and the demo board markup, shared with the hero stills.
+- `video/venues.js` — the rooms and the demo board markup, shared with the hero stills. Each room is a photograph from `video/rooms/` with the TV drawn on top, so the screen content is always exact. The table at the top of the file says where the TV sits in each photo.
+- `video/rooms/` — the room photographs, one wide (film) and one tall (hero) per room. They are AI-generated images, not real places.
 - `video/render.cjs` — renders the film and the stills.
 
 Open `video/film.html` in a browser to watch it loop, or add `?t=12.5` to hold a single frame. To re-render after an edit (needs Playwright and ffmpeg):
@@ -66,7 +67,9 @@ node video/render.cjs --stills   # → public/img/scenes/*.webp (hero photos)
 
 If you change scene timings, update the chapter `start` times in `src/content/site.ts` (`film.chapters`) to match.
 
-The café in the film ("Goldfinch Café") is a made-up example. The boards shown on the other walls, and in the hero stills, are real boards from the portfolio.
+The café in the film ("Goldfinch Café") is a made-up example. The boards shown on the other walls, and in the hero stills, are real boards from the portfolio. The rooms themselves are generated mockups, which is why the hero card is labelled "Mockup" and the film says "Shown in mockup rooms".
+
+To swap a room, replace its photo in `video/rooms/` (a straight-on shot with a blank TV works best), update that room's TV position in `video/venues.js`, and re-render.
 
 ## Deploy
 

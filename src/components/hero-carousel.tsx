@@ -8,8 +8,9 @@ const INTERVAL = 4500;
 const COUNT_MS = 700;
 
 /**
- * Rotating portrait card for the hero: an illustrated venue with a real board
- * on its screen, and a proof point that counts up as each slide arrives.
+ * Rotating portrait card for the hero: a room mockup with a real board on its
+ * screen, and a proof point that counts up as each slide arrives. The rooms are
+ * generated images, so the card says "Mockup".
  */
 export function HeroCarousel() {
   const [index, setIndex] = useState(0);
@@ -59,7 +60,7 @@ export function HeroCarousel() {
         className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] bg-ink-900 shadow-float"
         role="region"
         aria-roledescription="carousel"
-        aria-label="Boards on real walls"
+        aria-label="Board mockups in different rooms"
       >
         {heroSlides.map((s, i) => (
           // eslint-disable-next-line @next/next/no-img-element
@@ -68,8 +69,8 @@ export function HeroCarousel() {
             src={s.image}
             alt={i === index ? s.alt : ""}
             aria-hidden={i !== index}
-            width={1040}
-            height={1300}
+            width={1536}
+            height={1920}
             loading={i === 0 ? "eager" : "lazy"}
             fetchPriority={i === 0 ? "high" : "auto"}
             decoding="async"
@@ -77,6 +78,9 @@ export function HeroCarousel() {
           />
         ))}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink-950/55 to-transparent" />
+        <span className="absolute left-4 top-4 rounded-full bg-ink-950/55 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white backdrop-blur">
+          Mockup
+        </span>
 
         {/* Slide dashes */}
         <div className="absolute bottom-5 right-5 flex gap-1.5" role="tablist" aria-label="Choose a slide">
