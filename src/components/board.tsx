@@ -20,7 +20,7 @@ export function TvFrame({
     <div className={className}>
       <div className="relative rounded-[14px] bg-ink-950 p-2 shadow-float ring-1 ring-inset ring-white/10 sm:p-2.5">
         {live && (
-          <span className="absolute left-4 top-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-black/55 px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white backdrop-blur sm:left-5 sm:top-5">
+          <span className="absolute -top-3 left-4 z-10 inline-flex items-center gap-1.5 rounded-full bg-ink-950 px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-white shadow-md ring-1 ring-white/25 sm:left-5">
             <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-emerald-400" />
             {live}
           </span>

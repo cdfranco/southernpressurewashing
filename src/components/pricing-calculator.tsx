@@ -20,7 +20,7 @@ const money = (value: number) => "$" + Math.round(value).toLocaleString("en-US")
 
 const labelClass = "block text-sm font-semibold text-white/75";
 const selectClass =
-  "mt-2 w-full rounded-[10px] border border-white/15 bg-ink-700 px-3.5 py-2.5 text-[15px] font-medium text-white focus:outline-none focus:ring-2 focus:ring-brand-500/40";
+  "mt-2 w-full rounded-[10px] border border-white/15 bg-ink-700 px-3.5 py-2.5 text-base font-medium text-white sm:text-[15px] focus:outline-none focus:ring-2 focus:ring-brand-500/40";
 
 /**
  * Rollout calculator for the chain program. Every figure is derived from

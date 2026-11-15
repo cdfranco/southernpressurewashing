@@ -9,7 +9,7 @@
  * lead is forwarded to it as one JSON object:
  *
  *   { reference, receivedAt, name, business, email, phone,
- *     interest, locations, message, pageUrl, userAgent }
+ *     interest, locations, message, pageUrl, userAgent, ip }
  *
  * - `reference` is the "AB-XXXXXX" code the visitor is shown; `receivedAt` is an
  *   ISO 8601 timestamp. All other values are trimmed strings of at most 2000 characters.
@@ -83,6 +83,8 @@ export async function POST(request: Request) {
     message: clean(body.message),
     pageUrl: clean(body.pageUrl),
     userAgent: clean(request.headers.get("user-agent")),
+    // Kept for spam protection, as the privacy page says. Hosts put the visitor's address first.
+    ip: clean((request.headers.get("x-forwarded-for") ?? request.headers.get("x-real-ip") ?? "").split(",")[0]),
   };
 
   try {

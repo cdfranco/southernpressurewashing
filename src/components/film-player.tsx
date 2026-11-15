@@ -62,6 +62,9 @@ export function FilmPlayer() {
     video.currentTime = start + 0.05;
     setTime(start + 0.05);
     video.play().catch(() => {});
+    // If the tab was pressed with the film half off screen, bring the film into view.
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    frameRef.current?.scrollIntoView({ block: "nearest", behavior: reduced ? "auto" : "smooth" });
   };
 
   return (
@@ -89,7 +92,7 @@ export function FilmPlayer() {
       </div>
 
       {/* Video */}
-      <div ref={frameRef} className="mt-8 rounded-[1.75rem] border border-line bg-white/70 p-2.5 shadow-card sm:mt-12 sm:p-6">
+      <div ref={frameRef} className="mt-8 scroll-mb-6 scroll-mt-24 rounded-[1.75rem] border border-line bg-white/70 p-2.5 shadow-card sm:mt-12 sm:p-6">
         <div className="bg-film group relative aspect-video overflow-hidden rounded-2xl">
           <video
             ref={videoRef}
@@ -117,10 +120,12 @@ export function FilmPlayer() {
             <button
               type="button"
               onClick={toggle}
-              className="absolute left-1/2 top-1/2 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-2.5 rounded-full bg-white px-6 py-3.5 font-display text-base font-bold text-ink-900 shadow-float ring-8 ring-white/25 transition-transform hover:scale-[1.03] sm:text-lg"
+              aria-label={`Play: ${film.title}`}
+              className="absolute left-1/2 top-1/2 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 whitespace-nowrap rounded-full bg-white px-4 py-2.5 font-display text-sm font-bold text-ink-900 shadow-float ring-4 ring-white/25 transition-transform hover:scale-[1.03] sm:gap-2.5 sm:px-6 sm:py-3.5 sm:text-lg sm:ring-8"
             >
-              <Icon name="play" className="h-4.5 w-4.5 fill-current" strokeWidth={0} />
-              {film.title}
+              <Icon name="play" className="h-4 w-4 fill-current sm:h-4.5 sm:w-4.5" strokeWidth={0} />
+              <span className="sm:hidden">Play the film · {fmt(duration)}</span>
+              <span className="hidden sm:inline">{film.title}</span>
             </button>
           )}
 

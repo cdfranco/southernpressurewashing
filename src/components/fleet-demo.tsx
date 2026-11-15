@@ -20,7 +20,7 @@ export function FleetDemo({ tone = "dark", id = "fleet-store" }: { tone?: "light
           id={id}
           value={store}
           onChange={(e) => setStore(e.target.value)}
-          className={`max-w-full rounded-[10px] border px-3.5 py-2.5 text-[15px] font-medium focus:outline-none focus:ring-2 focus:ring-brand-500/40 sm:max-w-[22rem] ${
+          className={`max-w-full rounded-[10px] border px-3.5 py-2.5 text-base font-medium focus:outline-none sm:text-[15px] focus:ring-2 focus:ring-brand-500/40 sm:max-w-[22rem] ${
             dark ? "border-white/15 bg-ink-700 text-white" : "border-slate-300 bg-white text-ink-900"
           }`}
         >

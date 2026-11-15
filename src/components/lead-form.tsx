@@ -27,7 +27,7 @@ const defaultInterest = interestOptions[0].value;
 const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 const inputClass =
-  "w-full rounded-[10px] border border-slate-300 bg-white px-4 py-3 text-[15px] text-ink-900 placeholder:text-slate-400 focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/25 aria-[invalid=true]:border-red-500";
+  "w-full rounded-[10px] border border-slate-300 bg-white px-4 py-3 text-base text-ink-900 sm:text-[15px] placeholder:text-slate-400 focus:border-brand-600 focus:outline-none focus:ring-2 focus:ring-brand-500/25 aria-[invalid=true]:border-red-500";
 
 type Status = { kind: "ok" | "err"; text: string };
 type LeadResponse = { ok?: boolean; reference?: string; error?: string };

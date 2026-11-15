@@ -51,7 +51,8 @@ export function LiveBoard({ src, poster, title, portrait, label = "Live now", st
 
   return (
     <div ref={ref} className={className}>
-      <TvFrame portrait={portrait} live={label} stand={stand}>
+      {/* The badge only appears once the live board itself is on screen. */}
+      <TvFrame portrait={portrait} live={loaded ? label : undefined} stand={stand}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={poster} alt="" className="absolute inset-0 h-full w-full object-cover" />
         {mode === "live" && (
