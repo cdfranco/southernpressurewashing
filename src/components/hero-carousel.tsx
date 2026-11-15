@@ -2,14 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { boardImage, heroSlides } from "@/content/site";
-import { Icon } from "./icons";
 
 const INTERVAL = 4500;
 const COUNT_MS = 700;
 
 /**
  * Rotating portrait card for the hero: a room mockup with a real board on its
- * screen, and a proof point that counts up as each slide arrives. The rooms are
+ * screen. A status bar docked along the bottom shows that board on a miniature
+ * screen beside a proof point that counts up as each slide arrives. The rooms are
  * generated images, so the card says "Mockup".
  */
 export function HeroCarousel() {
@@ -77,13 +77,12 @@ export function HeroCarousel() {
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out ${i === index ? "opacity-100" : "opacity-0"}`}
           />
         ))}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink-950/55 to-transparent" />
         <span className="absolute left-4 top-4 rounded-full bg-ink-950/55 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white backdrop-blur">
           Mockup
         </span>
 
         {/* Slide dashes */}
-        <div className="absolute bottom-5 right-5 flex gap-1.5" role="tablist" aria-label="Choose a slide">
+        <div className="absolute right-4 top-3.5 flex gap-1 rounded-full bg-ink-950/55 px-2.5 backdrop-blur" role="tablist" aria-label="Choose a slide">
           {heroSlides.map((s, i) => (
             <button
               key={s.image}
@@ -92,40 +91,39 @@ export function HeroCarousel() {
               aria-selected={i === index}
               aria-label={`Slide ${i + 1} of ${heroSlides.length}`}
               onClick={() => setIndex(i)}
-              className="group flex h-6 items-center"
+              className="group flex h-7 items-center"
             >
-              <span className={`block h-[3px] w-8 rounded-full transition-colors ${i === index ? "bg-white" : "bg-white/40 group-hover:bg-white/70"}`} />
+              <span className={`block h-[3px] w-5 rounded-full transition-colors ${i === index ? "bg-white" : "bg-white/40 group-hover:bg-white/70"}`} />
             </button>
           ))}
         </div>
-      </div>
 
-      {/* Proof point */}
-      <div
-        key={index}
-        className="fade-up absolute -left-3 bottom-12 flex w-[17.5rem] max-w-[86%] items-center gap-3 rounded-2xl border border-white/70 bg-white/85 p-4 shadow-card backdrop-blur-md sm:-left-14 sm:bottom-14 sm:w-[19rem]"
-        aria-live="polite"
-      >
-        <div className="min-w-0 flex-1">
-          <p className="flex items-center gap-2 font-display text-[2rem] font-extrabold leading-none tracking-tight text-ink-900">
-            <Icon name="chart" className="h-5 w-5 text-emerald-600" strokeWidth={2} />
-            <span className="tabular-nums">
+        {/* Proof point: a status bar docked along the bottom of the picture, with the
+            slide's board on a miniature screen. */}
+        <div
+          className="absolute inset-x-3 bottom-3 flex items-center gap-3.5 rounded-2xl border border-white/70 bg-white/85 p-3 shadow-card backdrop-blur-md sm:inset-x-4 sm:bottom-4 sm:gap-4 sm:p-3.5"
+          aria-live="polite"
+        >
+          <div key={`screen-${index}`} className="fade-up w-[5.5rem] shrink-0 rounded-[7px] bg-ink-950 p-[3px] shadow-md sm:w-[7rem]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={boardImage(slide.board, "sm")}
+              alt=""
+              width={160}
+              height={90}
+              loading="lazy"
+              className="aspect-video w-full rounded-[4px] object-cover object-left-top"
+            />
+          </div>
+          <div key={index} className="fade-up min-w-0 flex-1">
+            <p className="font-display text-[1.75rem] font-extrabold leading-none tracking-tight text-ink-900 tabular-nums sm:text-[2rem]">
               {slide.prefix}
               {shown}
               {slide.suffix}
-            </span>
-          </p>
-          <p className="mt-1.5 text-[13.5px] leading-snug text-ink-900/75">{slide.label}</p>
+            </p>
+            <p className="mt-1.5 text-[13px] leading-snug text-ink-900/75 sm:text-[13.5px]">{slide.label}</p>
+          </div>
         </div>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={boardImage(slide.board, "sm")}
-          alt=""
-          width={72}
-          height={72}
-          loading="lazy"
-          className="h-[4.5rem] w-[4.5rem] shrink-0 rounded-full border-2 border-white object-cover shadow"
-        />
       </div>
     </div>
   );
